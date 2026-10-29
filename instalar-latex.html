@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instalar o LaTeX | ÉguaTex</title>
+  <meta name="description" content="Como instalar um compilador LaTeX para usar com o ÉguaTex no Windows.">
+  <meta name="theme-color" content="#1c0a2b">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <a class="marca" href="index.html" aria-label="ÉguaTex, início">
+      <img src="assets/img/curupira-256.png" alt="" width="40" height="40">
+      <span>ÉguaTex</span>
+    </a>
+    <nav aria-label="Seções">
+      <a href="index.html#fogueira">Experimente</a>
+      <a href="index.html#instalar">Instalar</a>
+      <a href="index.html#curupira">O curupira</a>
+      <a href="contato.html">Contato</a>
+      <a class="nav-baixar" href="index.html#baixar">Baixar</a>
+    </nav>
+  </header>
+
+  <main id="conteudo" class="contato texto-longo">
+
+<section class="contato-abertura"><h1>Instalar o compilador LaTeX</h1>
+<p class="sub">O instalador do ÉguaTex já traz o TinyTeX. Esta página serve para quem quer outra distribuição ou recebeu o aviso "Nenhum compilador LaTeX foi encontrado".</p></section>
+
+<h2>Opção 1: MiKTeX (recomendado para iniciantes)</h2>
+<ol>
+<li>Acesse <a href="https://miktex.org/download">miktex.org/download</a> e baixe o instalador para Windows.</li>
+<li>Rode o instalador e aceite as opções padrão.</li>
+<li>Na pergunta "Install missing packages on-the-fly", escolha <strong>Yes</strong>. Assim o MiKTeX baixa sozinho os pacotes que o documento pedir.</li>
+<li>Feche e abra o ÉguaTex de novo. O aviso some.</li>
+</ol>
+
+<h2>Opção 2: TeX Live (instalação completa)</h2>
+<ol>
+<li>Acesse <a href="https://tug.org/texlive/windows.html">tug.org/texlive/windows.html</a> e baixe o <code>install-tl-windows.exe</code>.</li>
+<li>Rode o instalador. A instalação completa ocupa cerca de 8 GB e leva de 1 a 2 horas.</li>
+<li>Feche e abra o ÉguaTex de novo.</li>
+</ol>
+
+<h2>Conferir se funcionou</h2>
+<p>Abra um projeto e clique em Compilar. Se o PDF aparecer à direita, está tudo certo. Se aparecer "Motor não encontrado", reinicie o computador para o Windows atualizar o PATH.</p>
+
+<p><a href="index.html">Página inicial</a> · <a href="contato.html">Contato</a></p>
+
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-faixa" aria-hidden="true"></div>
+    <div class="rodape-conteudo">
+      <p class="rodape-marca"><img src="assets/img/curupira-256.png" alt="" width="32" height="32"> ÉguaTex</p>
+      <p>Feito no Pará por José Paulo de Almeida Junior.</p>
+      <p><a href="https://github.com/jessicamelo0532/egua-tex">Código no GitHub</a>, <a href="contato.html">contato, sugestões e problemas</a>, <a href="instalar-latex.html">outras distribuições LaTeX</a> e <a href="privacidade.html">política de privacidade</a>.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-// ÉguaTex — fogueira de fórmulas e busca da versão mais recente do APK.
+// ÉguaTex: fogueira de fórmulas e busca da versão mais recente do instalador para Windows.
 
 const REPO = "jessicamelo0532/egua-tex";
 
@@ -68,28 +68,29 @@ async function buscarVersao() {
       headers: { Accept: "application/vnd.github+json" },
     });
     if (resp.status === 404) {
-      estado.textContent = "Ainda não há uma versão publicada. Assim que o APK for lançado, o botão abaixo passa a baixar o arquivo direto.";
+      estado.textContent = "Ainda não há uma versão publicada. Assim que o instalador for lançado, o botão abaixo passa a baixar o arquivo direto.";
       return;
     }
     if (!resp.ok) throw new Error("status " + resp.status);
 
     const release = await resp.json();
-    const apk = (release.assets || []).find((a) => a.name.toLowerCase().endsWith(".apk"));
-    if (!apk) {
-      estado.textContent = `A versão ${release.tag_name} foi publicada, mas ainda sem o arquivo APK. Veja a página de versões.`;
+    const instalador = (release.assets || []).find((a) => a.name.toLowerCase().endsWith("-setup.exe"))
+      || (release.assets || []).find((a) => a.name.toLowerCase().endsWith(".exe"));
+    if (!instalador) {
+      estado.textContent = `A versão ${release.tag_name} foi publicada, mas ainda sem o instalador. Veja a página de versões.`;
       return;
     }
 
     document.getElementById("r-versao").textContent = release.tag_name;
     document.getElementById("r-data").textContent = new Date(release.published_at)
       .toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
-    document.getElementById("r-tamanho").textContent = tamanhoLegivel(apk.size);
-    botao.href = apk.browser_download_url;
-    botao.textContent = "Baixar o APK";
+    document.getElementById("r-tamanho").textContent = tamanhoLegivel(instalador.size);
+    botao.href = instalador.browser_download_url;
+    botao.textContent = "Baixar para Windows";
     estado.textContent = "Versão mais recente, pronta para instalar.";
     detalhes.hidden = false;
   } catch (e) {
-    estado.textContent = "Não deu para consultar o GitHub agora. O botão abaixo leva à página de versões, onde o APK fica.";
+    estado.textContent = "Não deu para consultar o GitHub agora. O botão abaixo leva à página de versões, onde o instalador fica.";
   }
 }
 

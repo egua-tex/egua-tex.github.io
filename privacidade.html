@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Política de privacidade | ÉguaTex</title>
+  <meta name="description" content="Como o ÉguaTex trata os seus dados.">
+  <meta name="theme-color" content="#1c0a2b">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <a class="marca" href="index.html" aria-label="ÉguaTex, início">
+      <img src="assets/img/curupira-256.png" alt="" width="40" height="40">
+      <span>ÉguaTex</span>
+    </a>
+    <nav aria-label="Seções">
+      <a href="index.html#fogueira">Experimente</a>
+      <a href="index.html#instalar">Instalar</a>
+      <a href="index.html#curupira">O curupira</a>
+      <a href="contato.html">Contato</a>
+      <a class="nav-baixar" href="index.html#baixar">Baixar</a>
+    </nav>
+  </header>
+
+  <main id="conteudo" class="contato texto-longo">
+
+<section class="contato-abertura"><h1>Política de privacidade</h1></section>
+<p class="data">Atualizada em 27 de outubro de 2026</p>
+
+<p>O ÉguaTex é um editor LaTeX gratuito e de código aberto (licença AGPL-3.0) para Windows. Ele roda no computador da pessoa e não tem servidor próprio. Esta política explica quais dados o programa usa e para quê.</p>
+
+<h2>1. Sem conta, sem telemetria</h2>
+<p>O ÉguaTex funciona sem conta e sem internet. Ele não coleta estatísticas de uso, não usa rastreadores e não envia nada para o desenvolvedor. Os documentos ficam em pastas comuns no computador da pessoa.</p>
+
+<h2>2. Login com Google (opcional)</h2>
+<p>A assistente de IA vem desligada. Quem decide ligar entra com a própria conta Google. Nesse caso o programa pede estas permissões:</p>
+<ul>
+<li><strong>openid, email e profile:</strong> nome, e-mail e foto da conta, para mostrar na tela quem está conectado.</li>
+<li><strong>cloud-platform:</strong> criar, na conta da própria pessoa, um projeto do Google Cloud chamado "EguaTex" (identificador <code>eguatex-...</code>) e ativar nele a Gemini API. O programa não lê, não altera e não apaga nenhum outro projeto ou recurso.</li>
+<li><strong>generative-language.retriever:</strong> enviar à Gemini API as mensagens que a pessoa escreve na assistente e receber as respostas.</li>
+</ul>
+
+<h2>3. Como os dados são usados</h2>
+<ul>
+<li>As mensagens da assistente vão direto do computador da pessoa para a Gemini API do Google. O uso entra na cota gratuita da própria conta.</li>
+<li>Conforme o nível de acesso que a pessoa escolhe (só conversa, leitura ou sugestões), a assistente também envia ao Gemini trechos dos arquivos do projeto aberto e as mensagens de erro da compilação. Alterações nos arquivos só são gravadas quando a pessoa aceita cada sugestão.</li>
+<li>Nome, e-mail e foto aparecem só na tela do programa.</li>
+<li>Os dados não passam por nenhum servidor do ÉguaTex, não são vendidos, não são usados para publicidade e não são repassados a ninguém.</li>
+<li>Os dados recebidos das APIs do Google não são usados para treinar modelos de IA.</li>
+</ul>
+
+<h2>4. Onde ficam guardados</h2>
+<p>O token de acesso fica no Gerenciador de Credenciais do Windows, no computador da pessoa. A configuração da assistente fica na pasta de dados do programa. Nada fica guardado fora do computador da pessoa, exceto o que o próprio Google guarda na conta dela.</p>
+
+<h2>5. Como apagar</h2>
+<ul>
+<li>O botão "Sair" revoga o acesso no Google e apaga o token do computador.</li>
+<li>Desinstalar o programa também apaga o token e a configuração da assistente.</li>
+<li>O acesso pode ser revogado a qualquer momento em <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</li>
+<li>O projeto "EguaTex" criado no Google Cloud pode ser apagado pela pessoa em <a href="https://console.cloud.google.com">console.cloud.google.com</a>.</li>
+</ul>
+
+<h2>6. Uso limitado</h2>
+<p>O uso e a transferência, para qualquer outro app, de informações recebidas das APIs do Google seguem a <a href="https://developers.google.com/terms/api-services-user-data-policy">Política de dados do usuário dos serviços de API do Google</a>, incluindo os requisitos de uso limitado.</p>
+
+<h2>7. Contato</h2>
+<p>José Paulo de Almeida Junior, desenvolvedor do ÉguaTex: <a href="mailto:pa2010828@gmail.com">pa2010828@gmail.com</a>.</p>
+
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-faixa" aria-hidden="true"></div>
+    <div class="rodape-conteudo">
+      <p class="rodape-marca"><img src="assets/img/curupira-256.png" alt="" width="32" height="32"> ÉguaTex</p>
+      <p>Feito no Pará por José Paulo de Almeida Junior.</p>
+      <p><a href="https://github.com/jessicamelo0532/egua-tex">Código no GitHub</a>, <a href="contato.html">contato, sugestões e problemas</a>, <a href="instalar-latex.html">outras distribuições LaTeX</a> e <a href="privacidade.html">política de privacidade</a>.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

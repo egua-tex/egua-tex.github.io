@@ -294,3 +294,10 @@ button.botao { cursor: pointer; }
 .contato-email h2 { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 700; margin-bottom: 0.5em; }
 .email-endereco { margin: 0; font-family: var(--fonte-titulo); font-weight: 700; font-size: clamp(1.3rem, 4vw, 2rem); overflow-wrap: anywhere; }
 .email-endereco a { color: var(--chama); }
+
+/* Paginas de texto (privacidade, instalar LaTeX) no molde da pagina de contato */
+.texto-longo h2 { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 700; margin: 1.6em 0 0.5em; }
+.texto-longo p, .texto-longo li { font-size: 1.05rem; line-height: 1.65; }
+.texto-longo ul, .texto-longo ol { padding-left: 1.3em; }
+.texto-longo li { margin-bottom: 0.4em; }
+.texto-longo a { color: var(--chama); }
