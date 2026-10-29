@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ÉguaTex — LaTeX no celular, feito no Pará</title>
+  <meta name="description" content="ÉguaTex é um aplicativo Android para escrever em LaTeX, criado na Amazônia. Baixe o APK e experimente fórmulas direto no navegador.">
+  <meta name="theme-color" content="#1c0a2b">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:title" content="ÉguaTex">
+  <meta property="og:description" content="Escreva LaTeX no celular. Um app com sotaque amazônida.">
+  <meta property="og:image" content="assets/img/curupira.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <a class="marca" href="#inicio" aria-label="ÉguaTex, início">
+      <img src="assets/img/curupira-256.png" alt="" width="40" height="40">
+      <span>ÉguaTex</span>
+    </a>
+    <nav aria-label="Seções">
+      <a href="#fogueira">Experimente</a>
+      <a href="#instalar">Instalar</a>
+      <a href="#curupira">O curupira</a>
+      <a class="nav-baixar" href="#baixar">Baixar</a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <!-- ABERTURA -->
+    <section class="abertura" id="inicio">
+      <div class="abertura-texto">
+        <h1 class="palavra"><span class="acento">É</span>guaTex</h1>
+        <p class="lema">Escreva LaTeX no celular, de qualquer canto da Amazônia.</p>
+        <p class="apoio">Um aplicativo Android para montar fórmulas, trabalhos e artigos sem precisar de computador. Feito no Pará, aberto no GitHub.</p>
+        <div class="acoes">
+          <a class="botao botao-fogo" href="#baixar">Baixar o APK</a>
+          <a class="botao botao-linha" href="https://github.com/jessicamelo0532/egua-tex">Ver o código no GitHub</a>
+        </div>
+      </div>
+      <figure class="abertura-figura">
+        <div class="brasa" aria-hidden="true"></div>
+        <img src="assets/img/curupira.png" width="800" height="800"
+             alt="Logo do ÉguaTex: o curupira de perfil, com pele verde e cabelo em chamas que vai do roxo ao amarelo.">
+      </figure>
+    </section>
+
+    <!-- FOGUEIRA: editor ao vivo -->
+    <section class="fogueira" id="fogueira" aria-labelledby="fogueira-titulo">
+      <div class="secao-cabeca">
+        <h2 id="fogueira-titulo">Acenda uma fórmula</h2>
+        <p>Digite LaTeX à esquerda e veja o resultado na hora. É só uma amostra no navegador; no app você escreve documentos inteiros.</p>
+      </div>
+
+      <div class="exemplos" role="group" aria-label="Exemplos prontos">
+        <button type="button" data-ex="bhaskara" aria-pressed="true">Bhaskara</button>
+        <button type="button" data-ex="gauss">Integral de Gauss</button>
+        <button type="button" data-ex="euler">Identidade de Euler</button>
+        <button type="button" data-ex="matriz">Matriz</button>
+        <button type="button" data-ex="soma">Somatório</button>
+      </div>
+
+      <div class="editor">
+        <div class="painel painel-codigo">
+          <label for="entrada">Código LaTeX</label>
+          <textarea id="entrada" spellcheck="false" autocapitalize="off" autocomplete="off" rows="6"></textarea>
+        </div>
+        <div class="painel painel-saida">
+          <span class="rotulo" id="saida-rotulo">Resultado</span>
+          <div id="saida" class="saida" role="region" aria-labelledby="saida-rotulo" aria-live="polite"></div>
+          <p id="erro" class="erro" hidden></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BAIXAR -->
+    <section class="baixar" id="baixar" aria-labelledby="baixar-titulo">
+      <div class="baixar-caixa">
+        <img class="baixar-logo" src="assets/img/curupira-256.png" alt="" width="120" height="120">
+        <div class="baixar-info">
+          <h2 id="baixar-titulo">Baixe o ÉguaTex</h2>
+          <p id="release-estado" class="release-estado">Procurando a versão mais recente…</p>
+          <dl id="release-detalhes" class="release-detalhes" hidden>
+            <div><dt>Versão</dt><dd id="r-versao"></dd></div>
+            <div><dt>Publicada em</dt><dd id="r-data"></dd></div>
+            <div><dt>Tamanho</dt><dd id="r-tamanho"></dd></div>
+          </dl>
+          <div class="acoes">
+            <a id="r-botao" class="botao botao-fogo" href="https://github.com/jessicamelo0532/egua-tex/releases">Baixar o APK</a>
+            <a class="botao botao-linha" href="https://github.com/jessicamelo0532/egua-tex/releases">Todas as versões</a>
+          </div>
+          <p class="nota">Para Android. O arquivo vem direto do GitHub.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTALAR -->
+    <section class="instalar" id="instalar" aria-labelledby="instalar-titulo">
+      <div class="secao-cabeca">
+        <h2 id="instalar-titulo">Como instalar</h2>
+        <p>O ÉguaTex ainda não está na Play Store, então a instalação é feita pelo arquivo APK. Leva uns dois minutos.</p>
+      </div>
+      <ol class="passos">
+        <li>
+          <h3>Baixe o arquivo</h3>
+          <p>Toque em “Baixar o APK” nesta página, pelo celular. O arquivo vai para a pasta Downloads.</p>
+        </li>
+        <li>
+          <h3>Abra o arquivo baixado</h3>
+          <p>Toque na notificação do download ou procure o arquivo <code>.apk</code> no app Arquivos.</p>
+        </li>
+        <li>
+          <h3>Permita a instalação</h3>
+          <p>O Android vai pedir permissão para instalar apps desta fonte. Toque em “Configurações”, ative a opção e volte.</p>
+        </li>
+        <li>
+          <h3>Instale e abra</h3>
+          <p>Toque em “Instalar”. Quando terminar, o curupira aparece na sua tela inicial.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- CURUPIRA -->
+    <section class="curupira" id="curupira" aria-labelledby="curupira-titulo">
+      <svg class="rastro" viewBox="0 0 1200 120" aria-hidden="true" focusable="false">
+        <defs>
+          <g id="pe">
+            <ellipse cx="0" cy="0" rx="9" ry="15" />
+            <circle cx="-7" cy="19" r="3.2" />
+            <circle cx="-1" cy="22" r="3.4" />
+            <circle cx="5" cy="21" r="3" />
+            <circle cx="10" cy="17" r="2.6" />
+          </g>
+        </defs>
+        <use href="#pe" transform="translate(80 70) rotate(-95)" />
+        <use href="#pe" transform="translate(200 45) rotate(-85)" />
+        <use href="#pe" transform="translate(330 72) rotate(-98)" />
+        <use href="#pe" transform="translate(460 44) rotate(-82)" />
+        <use href="#pe" transform="translate(600 70) rotate(-94)" />
+        <use href="#pe" transform="translate(740 46) rotate(-86)" />
+        <use href="#pe" transform="translate(880 72) rotate(-97)" />
+        <use href="#pe" transform="translate(1010 44) rotate(-84)" />
+        <use href="#pe" transform="translate(1130 68) rotate(-92)" />
+      </svg>
+      <div class="curupira-texto">
+        <h2 id="curupira-titulo">Por que um curupira?</h2>
+        <p>Na lenda, o curupira protege a floresta. Tem o cabelo de fogo e os pés virados para trás, e quem tenta seguir as pegadas dele acaba andando na direção errada.</p>
+        <p>O ÉguaTex pegou emprestada essa teimosia. LaTeX costuma ser coisa de computador grande, de laboratório, de quem tem tempo e máquina. Aqui a ideia anda ao contrário: o texto científico cabe no celular de quem está na beira do rio, no ônibus para a UFPA ou na fila do Ver-o-Peso.</p>
+        <p>E o nome? “Égua” é como a gente diz que algo é bom demais por aqui. Égua, que fórmula bonita.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-faixa" aria-hidden="true"></div>
+    <div class="rodape-conteudo">
+      <p class="rodape-marca"><img src="assets/img/curupira-256.png" alt="" width="32" height="32"> ÉguaTex</p>
+      <p>Feito no Pará por <a href="https://github.com/jessicamelo0532">Jéssica Lopes Melo</a>.</p>
+      <p><a href="https://github.com/jessicamelo0532/egua-tex">Código no GitHub</a> e <a href="https://github.com/jessicamelo0532/egua-tex/issues">sugestões e problemas</a>.</p>
+    </div>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="assets/js/main.js"></script>
+</body>
+</html>

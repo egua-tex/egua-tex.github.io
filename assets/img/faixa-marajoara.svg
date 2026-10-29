@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="54" viewBox="0 0 56 54">
+<rect width="56" height="54" fill="#2a1140"/>
+<rect y="0" width="56" height="3" fill="#ff5f15"/>
+<rect y="51" width="56" height="3" fill="#ff5f15"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M-56 9H-12V33H-34M0 45H-44V21H-22M0 9H44V33H22M56 45H12V21H34M56 9H100V33H78M112 45H68V21H90" stroke="#12060f" stroke-width="11.5"/>
+<path d="M-56 9H-12V33H-34M0 45H-44V21H-22M0 9H44V33H22M56 45H12V21H34M56 9H100V33H78M112 45H68V21H90" stroke="#efe3cf" stroke-width="9"/>
+<path d="M-56 9H-12V33H-34M0 45H-44V21H-22M0 9H44V33H22M56 45H12V21H34M56 9H100V33H78M112 45H68V21H90" stroke="#12060f" stroke-width="1.6"/>
+</g></svg>
