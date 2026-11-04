@@ -7,3 +7,7 @@
 <p align="center">
   <a href="https://egua-tex.github.io/"><strong>egua-tex.github.io</strong></a>
 </p>
+
+<p align="center">
+  <sub>Desenvolvido por <a href="https://github.com/jessicamelo0532">Jéssica Melo</a> (jessicamelo0532)</sub>
+</p>
