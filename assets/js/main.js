@@ -1,6 +1,6 @@
 // ÉguaTex: fogueira de fórmulas e busca da versão mais recente do instalador para Windows.
 
-const REPO = "jessicamelo0532/egua-tex";
+const REPO = "egua-tex/egua-tex";
 
 /* ---------------- Fogueira: LaTeX ao vivo ---------------- */
 const EXEMPLOS = {
