@@ -9,5 +9,5 @@
 </p>
 
 <p align="center">
-  <sub>Desenvolvido por <a href="https://github.com/jessicamelo0532">Jéssica Melo</a> (jessicamelo0532)</sub>
+  <sub>Desenvolvido por <a href="https://github.com/jessicamelo0532">Jéssica Melo</a> e José Paulo de Almeida Junior</sub>
 </p>
