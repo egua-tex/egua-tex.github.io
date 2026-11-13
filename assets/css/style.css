@@ -301,3 +301,76 @@ button.botao { cursor: pointer; }
 .texto-longo ul, .texto-longo ol { padding-left: 1.3em; }
 .texto-longo li { margin-bottom: 0.4em; }
 .texto-longo a { color: var(--chama); }
+
+/* ---------- menu no celular ---------- */
+.menu-botao { display: none; }
+[id] { scroll-margin-top: 76px; }
+@media (max-width: 640px) {
+  .menu-botao {
+    display: inline-flex; align-items: center; gap: 10px;
+    font: inherit; font-family: var(--fonte-titulo); font-weight: 700; font-size: 1rem;
+    color: var(--texto); background: transparent; cursor: pointer;
+    border: 1.5px solid var(--roxo); border-radius: 999px; padding: 8px 16px;
+  }
+  .menu-icone { position: relative; width: 16px; height: 2px; background: currentColor; box-shadow: 0 -5px 0 currentColor, 0 5px 0 currentColor; transition: box-shadow .2s ease, transform .2s ease; }
+  .topo.aberto .menu-icone { box-shadow: none; transform: rotate(45deg); }
+  .topo.aberto .menu-icone::after { content: ""; position: absolute; inset: 0; background: currentColor; transform: rotate(90deg); }
+  .topo.tem-menu nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 6px var(--margem) 14px;
+    background: var(--noite); border-bottom: 1px solid var(--noite-3);
+    box-shadow: 0 18px 40px rgba(0,0,0,.45);
+  }
+  .topo.tem-menu.aberto nav { display: flex; }
+  .topo.tem-menu nav a, .topo.tem-menu nav a:not(.nav-baixar) {
+    display: block; padding: 13px 4px; font-size: 1.12rem; color: var(--texto);
+    border-bottom: 1px solid var(--noite-3);
+  }
+  .topo.tem-menu nav a:last-child { border-bottom: 0; color: var(--chama); }
+}
+
+/* ---------- tela de carregamento (página lenta e troca de aba) ---------- */
+.carregando {
+  position: fixed; inset: 0; z-index: 50;
+  display: grid; place-items: center;
+  background: var(--noite);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  opacity: 0; visibility: hidden;
+  transition: opacity .6s ease, visibility 0s linear .6s;
+}
+.carregando.mostrar { opacity: 1; visibility: visible; transition: opacity .35s ease; }
+.carregando-fundo {
+  font-family: var(--fonte-titulo); font-weight: 800;
+  font-size: clamp(4rem, 17vw, 13rem); letter-spacing: -0.05em; line-height: 1.05;
+  user-select: none; white-space: nowrap;
+}
+.carregando-fundo span {
+  color: transparent; -webkit-text-stroke: 2px rgba(201,166,240,.5);
+  background: linear-gradient(100deg, rgba(122,53,196,.28) 35%, rgba(255,182,39,.75) 50%, rgba(122,53,196,.28) 65%);
+  background-size: 300% 100%; -webkit-background-clip: text; background-clip: text;
+  animation: brilho 2.6s linear infinite;
+}
+@keyframes brilho { from { background-position: 100% 0; } to { background-position: -50% 0; } }
+.carregando-centro { position: relative; display: grid; justify-items: center; gap: 18px; text-align: center; max-width: 100%; }
+.trilha { display: flex; align-items: center; gap: 4px; }
+.carregando-logo { width: clamp(96px, 16vw, 150px); margin-bottom: -10px; filter: drop-shadow(0 0 28px rgba(255,120,40,.45)); animation: respirar 2.2s ease-in-out infinite; }
+@keyframes respirar { 50% { filter: drop-shadow(0 0 46px rgba(255,140,40,.75)); transform: translateY(-3px); } }
+.pegadas-carga { width: min(300px, 58vw); height: auto; fill: var(--verde-claro); overflow: visible; }
+.pegadas-carga use { opacity: 0; animation: pisar 3.2s infinite; }
+.pegadas-carga use:nth-child(2) { animation-delay: .32s; }
+.pegadas-carga use:nth-child(3) { animation-delay: .64s; }
+.pegadas-carga use:nth-child(4) { animation-delay: .96s; }
+.pegadas-carga use:nth-child(5) { animation-delay: 1.28s; }
+.pegadas-carga use:nth-child(6) { animation-delay: 1.6s; }
+.pegadas-carga use:nth-child(7) { animation-delay: 1.92s; }
+.pegadas-carga use:nth-child(8) { animation-delay: 2.24s; }
+@keyframes pisar { 0% { opacity: 0; } 5% { opacity: 1; } 45% { opacity: .45; } 75%, 100% { opacity: 0; } }
+.carregando-texto { color: var(--texto); font-family: var(--fonte-titulo); font-weight: 500; font-size: 1.1rem; margin: 0; }
+.carregando-dica { color: var(--texto-suave); font-size: .88rem; margin: -12px 0 0; max-width: 30ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  .carregando-logo, .carregando-fundo span, .pegadas-carga use { animation: none; }
+  .pegadas-carga use { opacity: .8; }
+}
