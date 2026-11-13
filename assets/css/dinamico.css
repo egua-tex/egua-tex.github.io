@@ -1,0 +1,232 @@
+/* ÉguaTex: camada de movimento da página inicial (tela de carregamento, entradas, portal, vaga-lumes).
+   Tudo fica parado para quem pede menos movimento no sistema. */
+:root {
+  color-scheme: dark;
+  --rio-ceu: #2b1046;
+  --rio-mata: #10230d;
+  --rio-agua: #1a0d2c;
+  --papel: #fbf7ff;
+  --tinta: #22102f;
+}
+html, body { background: var(--noite); }
+
+/* ---------- tela de carregamento ---------- */
+.carregando {
+  position: fixed; inset: 0; z-index: 50;
+  display: grid; place-items: center;
+  background: var(--noite);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  opacity: 0; visibility: hidden;
+  transition: opacity .6s ease, visibility 0s linear .6s;
+}
+.carregando.mostrar { opacity: 1; visibility: visible; transition: opacity .35s ease; }
+.carregando-fundo {
+  font-family: var(--fonte-titulo); font-weight: 800;
+  font-size: clamp(4rem, 17vw, 13rem); letter-spacing: -0.05em; line-height: 1.05;
+  user-select: none; white-space: nowrap;
+}
+.carregando-fundo span {
+  color: transparent; -webkit-text-stroke: 2px rgba(201,166,240,.5);
+  background: linear-gradient(100deg, rgba(122,53,196,.28) 35%, rgba(255,182,39,.75) 50%, rgba(122,53,196,.28) 65%);
+  background-size: 300% 100%; -webkit-background-clip: text; background-clip: text;
+  animation: brilho 2.6s linear infinite;
+}
+@keyframes brilho { from { background-position: 100% 0; } to { background-position: -50% 0; } }
+.carregando-centro { position: relative; display: grid; justify-items: center; gap: 18px; text-align: center; max-width: 100%; }
+.trilha { display: flex; align-items: center; gap: 4px; }
+.carregando-logo { width: clamp(96px, 16vw, 150px); margin-bottom: -10px; filter: drop-shadow(0 0 28px rgba(255,120,40,.45)); animation: respirar 2.2s ease-in-out infinite; }
+@keyframes respirar { 50% { filter: drop-shadow(0 0 46px rgba(255,140,40,.75)); transform: translateY(-3px); } }
+.pegadas-carga { width: min(300px, 58vw); height: auto; fill: var(--verde-claro); overflow: visible; }
+.pegadas-carga use { opacity: 0; animation: pisar 3.2s infinite; }
+.pegadas-carga use:nth-child(2) { animation-delay: .32s; }
+.pegadas-carga use:nth-child(3) { animation-delay: .64s; }
+.pegadas-carga use:nth-child(4) { animation-delay: .96s; }
+.pegadas-carga use:nth-child(5) { animation-delay: 1.28s; }
+.pegadas-carga use:nth-child(6) { animation-delay: 1.6s; }
+.pegadas-carga use:nth-child(7) { animation-delay: 1.92s; }
+.pegadas-carga use:nth-child(8) { animation-delay: 2.24s; }
+@keyframes pisar { 0% { opacity: 0; } 5% { opacity: 1; } 45% { opacity: .45; } 75%, 100% { opacity: 0; } }
+.carregando-texto { color: var(--texto); font-family: var(--fonte-titulo); font-weight: 500; font-size: 1.1rem; margin: 0; }
+.carregando-dica { color: var(--texto-suave); font-size: .88rem; margin: -12px 0 0; max-width: 30ch; }
+
+/* ---------- abertura com entrada desfocada ---------- */
+.abertura-figura { perspective: 900px; }
+.abertura-figura img { transition: transform .25s ease-out; will-change: transform; }
+.brasa { transition: transform .35s ease-out; animation: acender 2.4s ease-out both, pulsar 5s ease-in-out 2.4s infinite; }
+@keyframes pulsar { 50% { opacity: 1; } }
+
+.js:not(.calmo) .entra .letra,
+.js:not(.calmo) .entra .palavra-lema,
+.js:not(.calmo) .entra .apoio,
+.js:not(.calmo) .entra .acoes,
+.js:not(.calmo) .entra .abertura-figura img {
+  opacity: 0; filter: blur(14px); transform: translateY(14px);
+}
+#titulo { white-space: nowrap; }
+.letra, .palavra-lema { display: inline-block; }
+.letra { padding-top: .22em; margin-top: -.22em; }
+.palavra-lema { white-space: pre; }
+.js:not(.calmo) .entra.revelar .letra, .js:not(.calmo) .entra.revelar .palavra-lema, .js:not(.calmo) .entra.revelar .apoio, .js:not(.calmo) .entra.revelar .acoes, .js:not(.calmo) .entra.revelar .abertura-figura img {
+  opacity: 1; filter: blur(0); transform: none;
+  transition: opacity .9s ease, filter .9s ease, transform .9s cubic-bezier(.2,.7,.2,1);
+}
+.js:not(.calmo) .entra.revelar .abertura-figura img { transition-duration: 1.4s; }
+
+/* ---------- portal: do código ao PDF ---------- */
+.portal { position: relative; height: 280svh; }
+.portal-cena {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+  display: grid; align-items: center;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 38%, rgba(255,140,40,.22), transparent 70%),
+    linear-gradient(180deg, var(--noite) 0%, var(--rio-ceu) 46%, var(--rio-mata) 62%, var(--rio-agua) 100%);
+}
+.portal-mata { position: absolute; left: 0; right: 0; top: 49%; width: 100%; height: 16%; fill: var(--rio-mata); }
+.portal-reflexo {
+  position: absolute; left: 0; right: 0; top: 63%; bottom: 0;
+  background: repeating-linear-gradient(180deg, rgba(201,166,240,.05) 0 2px, transparent 2px 9px);
+  mask-image: linear-gradient(180deg, #000, transparent);
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent);
+}
+.portal-conteudo {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: clamp(16px, 4vw, 56px);
+  max-width: 1240px; width: 100%; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px), var(--margem));
+  padding-right: max(16px, env(safe-area-inset-right, 0px), var(--margem));
+}
+.legenda { position: relative; min-height: 9rem; min-width: 0; }
+.legenda > div { position: absolute; inset: 0 0 auto 0; transition: opacity .5s ease, filter .5s ease, transform .5s ease; }
+.legenda .some { opacity: 0; filter: blur(10px); transform: translateY(10px); pointer-events: none; }
+.legenda h2 { font-size: clamp(1.7rem, 3.6vw, 3rem); letter-spacing: -0.02em; text-wrap: balance; }
+.legenda p { color: var(--texto-suave); margin-top: .7em; max-width: 30ch; }
+.legenda-dir { text-align: right; }
+.legenda-dir p { margin-left: auto; }
+
+.palco { perspective: 1400px; }
+.cartao {
+  --giro: 0deg; --larg: 250px; --alt: 380px;
+  position: relative; width: var(--larg); height: var(--alt);
+  transform-style: preserve-3d; transform: rotateY(var(--giro));
+  will-change: transform, width, height;
+}
+.face {
+  position: absolute; inset: 0; border-radius: 18px; overflow: hidden;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.face-codigo {
+  background: linear-gradient(160deg, rgba(255,255,255,.16), rgba(255,255,255,.04));
+  border: 1px solid rgba(255,255,255,.28);
+  box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 40px rgba(255,160,60,.08);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  padding: 18px 16px;
+  font-family: var(--fonte-codigo); font-size: clamp(.62rem, 1.05vw, .8rem); line-height: 1.75;
+  color: var(--verde-claro); white-space: pre; overflow: hidden;
+}
+.face-codigo .cmd { color: var(--chama); }
+.face-codigo .arg { color: var(--roxo-claro); }
+.face-codigo .cursor { display: inline-block; width: .55em; height: 1.1em; vertical-align: -0.2em; background: var(--chama); animation: piscar 1s steps(1) infinite; }
+@keyframes piscar { 50% { opacity: 0; } }
+.face-pdf {
+  transform: rotateY(180deg);
+  background: var(--papel); color: var(--tinta);
+  box-shadow: 0 30px 80px rgba(0,0,0,.5);
+  padding: 9% 10%;
+  font-family: "Times New Roman", Times, serif; font-size: clamp(.6rem, 1vw, .82rem); line-height: 1.5;
+  display: flex; flex-direction: column;
+}
+.pdf-titulo { text-align: center; font-weight: 700; font-size: 1.35em; margin: 8% 0 2%; }
+.pdf-autor, .pdf-local { text-align: center; margin: 0; }
+.pdf-local { margin-bottom: 12%; }
+.pdf-secao { font-weight: 700; margin: 0 0 .6em; }
+.pdf-p { text-indent: 1.25cm; text-align: justify; margin: 0 0 .5em; }
+.pdf-eq { display: flex; align-items: center; justify-content: center; position: relative; margin: .4em 0 .8em; }
+.pdf-eq .num { position: absolute; right: 0; }
+.pdf-linha { height: .55em; background: #ddd3e8; border-radius: 2px; margin: .55em 0; }
+.pdf-pagina { margin-top: auto; text-align: right; font-size: .9em; color: #6a5880; }
+
+/* ---------- pegadas do curupira ---------- */
+.js:not(.calmo) .rastro.andou use { animation: pisar 5.4s infinite both; }
+.js:not(.calmo) .rastro { opacity: .8; }
+
+
+/* ---------- vaga-lumes na abertura e na beira do rio ---------- */
+.abertura { position: relative; }
+.abertura > :not(.vagalumes) { position: relative; z-index: 1; }
+.vagalumes { position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); pointer-events: none; z-index: 0; }
+.portal-cena .vagalumes { left: 0; width: 100%; transform: none; }
+
+/* ---------- topo: encolhe ao rolar e mostra o quanto já leu ---------- */
+.topo { transition: padding .3s ease, box-shadow .3s ease; }
+.topo.rolou { padding-top: 8px; padding-bottom: 8px; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.topo::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px;
+  background: linear-gradient(90deg, var(--roxo), var(--brasa), var(--fogo), var(--chama));
+  transform-origin: left; transform: scaleX(var(--lido, 0));
+}
+
+/* ---------- títulos de seção surgem do desfocado ---------- */
+.js:not(.calmo) .surge { opacity: 0; filter: blur(12px); transform: translateY(18px); }
+.js:not(.calmo) .surge.visto { opacity: 1; filter: none; transform: none; transition: opacity .8s ease, filter .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+
+/* ---------- passos da instalação acendem em sequência ---------- */
+.js:not(.calmo) .passos li::before { transform: scale(.4); opacity: 0; transition: transform .5s cubic-bezier(.3,1.6,.5,1), opacity .3s ease; }
+.js:not(.calmo) .passos li::after { transform: scaleX(0); transform-origin: left; transition: transform .7s ease; }
+.js:not(.calmo) .passos li > * { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
+.js:not(.calmo) .passos.visto li::before { transform: none; opacity: 1; }
+.js:not(.calmo) .passos.visto li::after { transform: scaleX(1); }
+.js:not(.calmo) .passos.visto li > * { opacity: 1; transform: none; }
+.passos li:nth-child(2)::before, .passos li:nth-child(2) > * { transition-delay: .35s; }
+.passos li:nth-child(1)::after { transition-delay: .2s; }
+.passos li:nth-child(3)::before, .passos li:nth-child(3) > * { transition-delay: .7s; }
+.passos li:nth-child(2)::after { transition-delay: .55s; }
+.passos li:nth-child(4)::before, .passos li:nth-child(4) > * { transition-delay: 1.05s; }
+.passos li:nth-child(3)::after { transition-delay: .9s; }
+
+/* ---------- caixa de download com aro de fogo girando ---------- */
+@property --aro { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.js:not(.calmo) .baixar-caixa {
+  background:
+    linear-gradient(var(--noite-2), var(--noite-2)) padding-box,
+    conic-gradient(from var(--aro), var(--chama), var(--fogo), var(--brasa), var(--roxo), var(--verde), var(--chama)) border-box;
+  animation: girar-aro 7s linear infinite;
+}
+@keyframes girar-aro { to { --aro: 360deg; } }
+.js:not(.calmo) .baixar-logo { animation: flutuar 4s ease-in-out infinite; }
+@keyframes flutuar { 50% { transform: translateY(-8px) rotate(-3deg); } }
+.botao-fogo { position: relative; overflow: hidden; }
+.botao-fogo::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+.js:not(.calmo) .botao-fogo:hover::after { transform: translateX(120%); transition: transform .7s ease; }
+
+/* ---------- faixa marajoara corre devagar, como o rio ---------- */
+.js:not(.calmo) .rodape-faixa { animation: correr 11s linear infinite; }
+@keyframes correr { to { background-position-x: 540px; } }
+
+/* ---------- editor: cursor enquanto a fórmula é digitada ---------- */
+.painel-codigo.digitando textarea { caret-color: transparent; }
+.painel-codigo.digitando label::after { content: " digitando…"; color: var(--chama); }
+
+@media (max-width: 760px) {
+  .portal-conteudo { grid-template-columns: 1fr; grid-template-areas: "leg" "palco"; justify-items: center; gap: 22px; align-content: center; }
+  .legenda { grid-area: leg; min-height: 8.5rem; width: 100%; text-align: center; }
+  .legenda p, .legenda-dir p { margin-left: auto; margin-right: auto; }
+  .legenda-dir { text-align: center; }
+  .palco { grid-area: palco; }
+  .cartao { --larg: 200px; --alt: 300px; }
+}
+
+/* sem animação: o portal vira duas folhas lado a lado, sem rolagem presa */
+.calmo .portal { height: auto; }
+.calmo .portal-cena { position: relative; height: auto; padding-block: 72px; }
+.calmo .legenda > div { position: static; }
+.calmo .portal-conteudo { grid-template-areas: none; }
+.calmo .legenda { grid-area: auto; }
+.calmo .legenda .some { opacity: 1; filter: none; transform: none; }
+.calmo .legenda-dir .some { display: none; }
+.calmo .cartao { transform: none; width: auto; height: auto; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.calmo .face { position: relative; width: 240px; height: 360px; transform: none; backface-visibility: visible; }

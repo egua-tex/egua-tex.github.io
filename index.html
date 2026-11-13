@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ÉguaTex: editor LaTeX para Windows, feito no Pará</title>
-  <meta name="description" content="ÉguaTex é um editor LaTeX livre, gratuito e offline para Windows, criado na Amazônia. Baixe o instalador e experimente fórmulas direto no navegador.">
+  <meta name="description" content="ÉguaTex é um editor LaTeX gratuito e offline para Windows, criado na Amazônia. Baixe o instalador e experimente fórmulas direto no navegador.">
   <meta name="theme-color" content="#1c0a2b">
   <link rel="icon" type="image/png" href="favicon.png">
   <meta property="og:title" content="ÉguaTex">
@@ -16,8 +16,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dinamico.css">
+  <script>
+    /* Antes de pintar a página: liga as animações só com JavaScript e respeita quem pede menos movimento. */
+    document.documentElement.classList.add("js");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("calmo");
+  </script>
 </head>
 <body>
+  <!-- TELA DE CARREGAMENTO: só aparece se a página demorar -->
+  <div class="carregando" id="carregando" role="status" aria-live="polite" aria-label="Carregando o ÉguaTex">
+    <div class="carregando-centro">
+      <img class="carregando-logo" src="assets/img/curupira-256.png" alt="" width="150" height="150">
+      <div class="carregando-fundo" aria-hidden="true"><span>ÉguaTex</span></div>
+      <div class="trilha">
+      <svg class="pegadas-carga" viewBox="0 0 360 64" aria-hidden="true">
+        <use href="#pe" transform="translate(30 18) rotate(90)"/>
+        <use href="#pe" transform="translate(70 44) rotate(90)"/>
+        <use href="#pe" transform="translate(110 18) rotate(90)"/>
+        <use href="#pe" transform="translate(150 44) rotate(90)"/>
+        <use href="#pe" transform="translate(190 18) rotate(90)"/>
+        <use href="#pe" transform="translate(230 44) rotate(90)"/>
+        <use href="#pe" transform="translate(270 18) rotate(90)"/>
+        <use href="#pe" transform="translate(310 44) rotate(90)"/>
+      </svg>
+      </div>
+      <p class="carregando-texto">Acendendo a fogueira…</p>
+      <p class="carregando-dica">Os pés do curupira apontam para um lado e ele anda para o outro.</p>
+    </div>
+  </div>
+
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
   <header class="topo">
@@ -26,6 +54,7 @@
       <span>ÉguaTex</span>
     </a>
     <nav aria-label="Seções">
+      <a href="#portal">Como funciona</a>
       <a href="#fogueira">Experimente</a>
       <a href="#instalar">Instalar</a>
       <a href="#curupira">O curupira</a>
@@ -35,31 +64,90 @@
   </header>
 
   <main id="conteudo">
-    <!-- ABERTURA -->
-    <section class="abertura" id="inicio">
+    <section class="abertura entra" id="inicio">
+      <canvas class="vagalumes" aria-hidden="true"></canvas>
       <div class="abertura-texto">
-        <h1 class="palavra"><span class="acento">É</span>guaTex</h1>
-        <p class="lema">Escreva LaTeX no computador, de qualquer canto da Amazônia, mesmo sem internet.</p>
-        <p class="apoio">Um programa para Windows que escreve e compila TCC, artigos e relatórios, com o PDF ao lado do texto. O compilador LaTeX já vem junto. Gratuito, em português, feito no Pará e aberto no GitHub.</p>
+        <h1 class="palavra" id="titulo" aria-label="ÉguaTex"><span class="acento">É</span>guaTex</h1>
+        <p class="lema" id="lema">Escreva LaTeX no computador, de qualquer canto da Amazônia, mesmo sem internet.</p>
+        <p class="apoio">Um programa para Windows que escreve e compila TCC, artigos e relatórios, com o PDF ao lado do texto. O compilador LaTeX já vem junto. Gratuito, em português e feito no Pará.</p>
         <div class="acoes">
           <a class="botao botao-fogo" href="#baixar">Baixar para Windows</a>
-          <a class="botao botao-linha" href="https://github.com/egua-tex/egua-tex.github.io">Ver o código no GitHub</a>
+          <a class="botao botao-linha" href="#portal">Ver como funciona</a>
         </div>
       </div>
-      <figure class="abertura-figura">
+      <figure class="abertura-figura" id="figura">
         <div class="brasa" aria-hidden="true"></div>
         <img src="assets/img/curupira.png" width="800" height="800"
              alt="Logo do ÉguaTex: o curupira de perfil, com pele verde e cabelo em chamas que vai do roxo ao amarelo.">
       </figure>
     </section>
 
-    <!-- FOGUEIRA: editor ao vivo -->
+    <!-- PORTAL: o cartão de vidro gira com a rolagem e o código vira PDF -->
+    <section class="portal" id="portal" aria-labelledby="portal-titulo">
+      <div class="portal-cena">
+        <svg class="portal-mata" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 100V62l30-8 22 10 26-26 24 18 30-30 26 22 34-12 20 16 30-34 28 26 26-8 30 18 24-28 34 24 30-14 26 20 32-40 24 30 28-12 30 16 26-22 32 20 28-30 26 24 30-10 24 14 34-36 30 30 26-10 30 18 24-26 32 22 28-14 30 20 26-30 30 24 28-8 30 12 26-20 34 18 28-24 26 20 30-12 24 10V100z"/>
+        </svg>
+        <div class="portal-reflexo" aria-hidden="true"></div>
+        <canvas class="vagalumes" aria-hidden="true"></canvas>
+
+        <div class="portal-conteudo">
+          <div class="legenda legenda-esq">
+            <div id="leg-a">
+              <h2 id="portal-titulo">Você escreve o texto</h2>
+              <p>Comandos simples de LaTeX, num editor em português, mesmo sem conexão.</p>
+            </div>
+          </div>
+
+          <div class="palco">
+            <div class="cartao" id="cartao">
+              <div class="face face-codigo" aria-label="Exemplo de código LaTeX de um TCC"><span class="cmd">\documentclass</span>{<span class="arg">abntex2</span>}
+  <span class="cmd">\title</span>{<span class="arg">Vazão do rio Guamá</span>}
+  <span class="cmd">\author</span>{<span class="arg">Paulo Almeida</span>}
+
+  <span class="cmd">\begin</span>{<span class="arg">document</span>}
+  <span class="cmd">\maketitle</span>
+
+  <span class="cmd">\section</span>{<span class="arg">Introdução</span>}
+  A vazão de um rio é
+  dada por
+
+  <span class="cmd">\begin</span>{<span class="arg">equation</span>}
+    Q = A \cdot v
+  <span class="cmd">\end</span>{<span class="arg">equation</span>}
+
+  <span class="cmd">\end</span>{<span class="arg">document</span>}<span class="cursor"></span></div>
+
+              <div class="face face-pdf" aria-label="O mesmo texto compilado em PDF">
+                <p class="pdf-titulo">Vazão do rio Guamá</p>
+                <p class="pdf-autor">Paulo Almeida</p>
+                <p class="pdf-local">Belém, 2026</p>
+                <p class="pdf-secao">1 INTRODUÇÃO</p>
+                <p class="pdf-p">A vazão de um rio é dada por</p>
+                <div class="pdf-eq"><span id="eq-pdf">Q = A · v</span><span class="num">(1)</span></div>
+                <div class="pdf-linha"></div>
+                <div class="pdf-linha"></div>
+                <div class="pdf-linha" style="width:72%"></div>
+                <p class="pdf-pagina">1</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="legenda legenda-dir">
+            <div id="leg-b" class="some">
+              <h2>e o ÉguaTex entrega o PDF</h2>
+              <p>Um clique em Compilar e a página sai pronta, no padrão da ABNT, ao lado do texto.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="fogueira" id="fogueira" aria-labelledby="fogueira-titulo">
-      <div class="secao-cabeca">
+      <div class="secao-cabeca surge">
         <h2 id="fogueira-titulo">Acenda uma fórmula</h2>
         <p>Digite LaTeX à esquerda e veja o resultado na hora. É só uma amostra no navegador. No programa você escreve documentos inteiros.</p>
       </div>
-
       <div class="exemplos" role="group" aria-label="Exemplos prontos">
         <button type="button" data-ex="bhaskara" aria-pressed="true">Bhaskara</button>
         <button type="button" data-ex="gauss">Integral de Gauss</button>
@@ -67,7 +155,6 @@
         <button type="button" data-ex="matriz">Matriz</button>
         <button type="button" data-ex="soma">Somatório</button>
       </div>
-
       <div class="editor">
         <div class="painel painel-codigo">
           <label for="entrada">Código LaTeX</label>
@@ -81,9 +168,8 @@
       </div>
     </section>
 
-    <!-- BAIXAR -->
     <section class="baixar" id="baixar" aria-labelledby="baixar-titulo">
-      <div class="baixar-caixa">
+      <div class="baixar-caixa surge">
         <img class="baixar-logo" src="assets/img/curupira-256.png" alt="" width="120" height="120">
         <div class="baixar-info">
           <h2 id="baixar-titulo">Baixe o ÉguaTex</h2>
@@ -102,35 +188,21 @@
       </div>
     </section>
 
-    <!-- INSTALAR -->
     <section class="instalar" id="instalar" aria-labelledby="instalar-titulo">
-      <div class="secao-cabeca">
+      <div class="secao-cabeca surge">
         <h2 id="instalar-titulo">Como instalar</h2>
         <p>A instalação leva uns dois minutos e não pede conta nem cadastro.</p>
       </div>
       <ol class="passos">
-        <li>
-          <h3>Baixe o instalador</h3>
-          <p>Clique em “Baixar para Windows” nesta página. O arquivo <code>ÉguaTex_x64-setup.exe</code> vai para a pasta Downloads.</p>
-        </li>
-        <li>
-          <h3>Abra o arquivo baixado</h3>
-          <p>Dê dois cliques no instalador. Se o Windows mostrar “O Windows protegeu o computador”, clique em “Mais informações” e depois em “Executar assim mesmo”. O aviso aparece porque o programa ainda não tem assinatura digital.</p>
-        </li>
-        <li>
-          <h3>Instale</h3>
-          <p>Siga as telas do instalador. Não precisa ser administrador nem instalar o LaTeX à parte: o TinyTeX já vem junto.</p>
-        </li>
-        <li>
-          <h3>Abra e escreva</h3>
-          <p>O curupira aparece no menu Iniciar. Crie um documento em branco, escreva e clique em Compilar para ver o PDF.</p>
-        </li>
+        <li><h3>Baixe o instalador</h3><p>Clique em “Baixar para Windows” nesta página. O arquivo <code>ÉguaTex_x64-setup.exe</code> vai para a pasta Downloads.</p></li>
+        <li><h3>Abra o arquivo baixado</h3><p>Dê dois cliques no instalador. Se o Windows mostrar “O Windows protegeu o computador”, clique em “Mais informações” e depois em “Executar assim mesmo”. O aviso aparece porque o programa ainda não tem assinatura digital.</p></li>
+        <li><h3>Instale</h3><p>Siga as telas do instalador. Não precisa ser administrador nem instalar o LaTeX à parte: o TinyTeX já vem junto.</p></li>
+        <li><h3>Abra e escreva</h3><p>O curupira aparece no menu Iniciar. Crie um documento em branco, escreva e clique em Compilar para ver o PDF.</p></li>
       </ol>
     </section>
 
-    <!-- CURUPIRA -->
     <section class="curupira" id="curupira" aria-labelledby="curupira-titulo">
-      <svg class="rastro" viewBox="0 0 1200 120" aria-hidden="true" focusable="false">
+      <svg class="rastro" id="rastro" viewBox="0 0 1200 120" aria-hidden="true" focusable="false">
         <defs>
           <g id="pe">
             <ellipse cx="0" cy="0" rx="9" ry="15" />
@@ -140,17 +212,17 @@
             <circle cx="10" cy="17" r="2.6" />
           </g>
         </defs>
-        <use href="#pe" transform="translate(80 70) rotate(-95)" />
-        <use href="#pe" transform="translate(200 45) rotate(-85)" />
-        <use href="#pe" transform="translate(330 72) rotate(-98)" />
-        <use href="#pe" transform="translate(460 44) rotate(-82)" />
-        <use href="#pe" transform="translate(600 70) rotate(-94)" />
-        <use href="#pe" transform="translate(740 46) rotate(-86)" />
-        <use href="#pe" transform="translate(880 72) rotate(-97)" />
-        <use href="#pe" transform="translate(1010 44) rotate(-84)" />
-        <use href="#pe" transform="translate(1130 68) rotate(-92)" />
+        <use href="#pe" transform="translate(80 70) rotate(95)" />
+        <use href="#pe" transform="translate(200 45) rotate(85)" />
+        <use href="#pe" transform="translate(330 72) rotate(98)" />
+        <use href="#pe" transform="translate(460 44) rotate(82)" />
+        <use href="#pe" transform="translate(600 70) rotate(94)" />
+        <use href="#pe" transform="translate(740 46) rotate(86)" />
+        <use href="#pe" transform="translate(880 72) rotate(97)" />
+        <use href="#pe" transform="translate(1010 44) rotate(84)" />
+        <use href="#pe" transform="translate(1130 68) rotate(92)" />
       </svg>
-      <div class="curupira-texto">
+      <div class="curupira-texto surge">
         <h2 id="curupira-titulo">Por que um curupira?</h2>
         <p>Na lenda, o curupira protege a floresta. Tem o cabelo de fogo e os pés virados para trás, e quem tenta seguir as pegadas dele acaba andando na direção errada.</p>
         <p>O ÉguaTex pegou emprestada essa teimosia. LaTeX costuma ser coisa de computador grande, de laboratório, de quem tem tempo e máquina. Aqui a ideia anda ao contrário: o texto científico cabe no computador de casa, funciona sem internet na beira do rio e não pede máquina de laboratório para quem estuda na UFPA.</p>
@@ -164,11 +236,12 @@
     <div class="rodape-conteudo">
       <p class="rodape-marca"><img src="assets/img/curupira-256.png" alt="" width="32" height="32"> ÉguaTex</p>
       <p>Feito no Pará por Jéssica Melo e José Paulo de Almeida Junior.</p>
-      <p><a href="https://github.com/egua-tex/egua-tex.github.io">Código no GitHub</a>, <a href="contato.html">contato, sugestões e problemas</a>, <a href="instalar-latex.html">outras distribuições LaTeX</a> e <a href="privacidade.html">política de privacidade</a>.</p>
+      <p><a href="contato.html">Contato, sugestões e problemas</a>, <a href="instalar-latex.html">outras distribuições LaTeX</a> e <a href="privacidade.html">política de privacidade</a>.</p>
     </div>
   </footer>
 
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script defer src="assets/js/main.js"></script>
+  <script defer src="assets/js/dinamico.js"></script>
 </body>
 </html>
