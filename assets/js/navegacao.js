@@ -3,6 +3,16 @@
 (() => {
   const TEMPO_TROCA = 1500; // quanto tempo a tela do curupira fica ao trocar de aba, em milissegundos
 
+  /* ---------- contador de visitas (GoatCounter: sem cookies e sem dados pessoais) ---------- */
+  const cfg = window.EGUATEX || {};
+  if (cfg.contadorVisitas && !document.body.hasAttribute("data-sem-contagem")) {
+    const contador = document.createElement("script");
+    contador.async = true;
+    contador.src = "https://gc.zgo.at/count.js";
+    contador.dataset.goatcounter = `https://${cfg.contadorVisitas}.goatcounter.com/count`;
+    document.head.appendChild(contador);
+  }
+
   /* ---------- tela de carregamento ---------- */
   const pegadas = [30, 70, 110, 150, 190, 230, 270, 310]
     .map((x, i) => `<use href="#pe-carga" transform="translate(${x} ${i % 2 ? 44 : 18}) rotate(90)"/>`)

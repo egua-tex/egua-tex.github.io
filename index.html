@@ -203,8 +203,49 @@
       <div class="curupira-texto surge">
         <h2 id="curupira-titulo">Por que um curupira?</h2>
         <p>Na lenda, o curupira protege a floresta. Tem o cabelo de fogo e os pés virados para trás, e quem tenta seguir as pegadas dele acaba andando na direção errada.</p>
-        <p>O ÉguaTex pegou emprestada essa teimosia. LaTeX costuma ser coisa de computador grande, de laboratório, de quem tem tempo e máquina. Aqui a ideia anda ao contrário: o texto científico cabe no computador de casa, funciona sem internet na beira do rio e não pede máquina de laboratório para quem estuda na UFPA.</p>
+        <p>O ÉguaTex pegou emprestada essa teimosia. LaTeX costuma ser coisa de computador grande, de laboratório, de quem tem tempo e máquina. Aqui a ideia anda ao contrário: o texto científico cabe no computador de casa, funciona sem internet na beira do rio e no ônibus para a UFPA.</p>
         <p>E o nome? “Égua” é como a gente diz que algo é bom demais por aqui. Égua, que fórmula bonita.</p>
+      </div>
+    </section>
+
+    <section class="avaliacoes" id="avaliacoes" aria-labelledby="avaliacoes-titulo" hidden>
+      <div class="secao-cabeca surge">
+        <h2 id="avaliacoes-titulo">O que estão achando</h2>
+        <p>Avaliações de quem baixou e usou o ÉguaTex.</p>
+      </div>
+
+      <div class="av-grade">
+        <div class="av-coluna">
+          <div class="av-resumo">
+            <p class="av-media" id="av-media">…</p>
+            <div class="av-estrelas-media" id="av-estrelas-media" aria-hidden="true"></div>
+            <p class="av-total" id="av-total"></p>
+          </div>
+          <ul class="av-lista" id="av-lista" aria-live="polite"></ul>
+        </div>
+
+        <form class="av-form" id="av-form" novalidate>
+          <h3>Avalie o ÉguaTex</h3>
+          <fieldset class="av-nota" id="av-nota">
+            <legend>Sua nota</legend>
+            <label><input type="radio" name="nota" value="1" required><span class="sr">1 estrela</span></label>
+            <label><input type="radio" name="nota" value="2"><span class="sr">2 estrelas</span></label>
+            <label><input type="radio" name="nota" value="3"><span class="sr">3 estrelas</span></label>
+            <label><input type="radio" name="nota" value="4"><span class="sr">4 estrelas</span></label>
+            <label><input type="radio" name="nota" value="5"><span class="sr">5 estrelas</span></label>
+          </fieldset>
+          <label class="campo" for="av-nome"><span>Nome</span>
+            <input id="av-nome" name="nome" type="text" autocomplete="name" required minlength="2" maxlength="60">
+          </label>
+          <label class="campo" for="av-comentario"><span>Comentário</span>
+            <textarea id="av-comentario" name="comentario" rows="5" required minlength="5" maxlength="1000"></textarea>
+            <small id="av-contador">0 de 1000</small>
+          </label>
+          <label class="av-escondido" aria-hidden="true">Site <input name="site" type="text" tabindex="-1" autocomplete="off"></label>
+          <p class="av-publico">Seu nome e seu comentário aparecem no site.</p>
+          <button type="submit" class="botao botao-fogo">Enviar avaliação</button>
+          <p class="av-aviso" id="av-aviso" role="status" hidden></p>
+        </form>
       </div>
     </section>
   </main>
@@ -218,9 +259,11 @@
     </div>
   </footer>
 
+  <script defer src="assets/js/config.js"></script>
   <script defer src="assets/js/navegacao.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script defer src="assets/js/main.js"></script>
   <script defer src="assets/js/dinamico.js"></script>
+  <script defer src="assets/js/avaliacoes.js"></script>
 </body>
 </html>
