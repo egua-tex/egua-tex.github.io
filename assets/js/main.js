@@ -1,4 +1,4 @@
-// ÉguaTex: editor de fórmulas ao vivo e busca da versão mais recente do instalador.
+// ÉguaTex: editor de fórmulas ao vivo e busca da versão mais recente dos instaladores (Windows, Android e Linux).
 
 const REPO = "egua-tex/egua-tex.github.io";
 
@@ -55,11 +55,41 @@ renderizar();
 /* ---------------- Baixar: versão mais recente no GitHub ---------------- */
 const estado = document.getElementById("release-estado");
 const detalhes = document.getElementById("release-detalhes");
-const botao = document.getElementById("r-botao");
+
+// Cada sistema procura o seu arquivo na publicação mais recente.
+const PLATAFORMAS = [
+  { id: "p-windows", acha: (n) => n.endsWith("-setup.exe") || n.endsWith(".exe") || n.endsWith(".msi") },
+  { id: "p-android", acha: (n) => n.endsWith(".apk") },
+  { id: "p-linux", acha: (n) => n.endsWith(".appimage") || n.endsWith(".deb") || n.endsWith(".rpm") },
+];
 
 function tamanhoLegivel(bytes) {
   const mb = bytes / (1024 * 1024);
   return mb >= 1 ? mb.toFixed(1).replace(".", ",") + " MB" : Math.round(bytes / 1024) + " KB";
+}
+
+function ligar(id, arquivo) {
+  const caixa = document.getElementById(id);
+  if (!caixa) return;
+  const atual = caixa.querySelector(".botao");
+  const link = document.createElement("a");
+  link.className = "botao botao-fogo";
+  link.href = arquivo.browser_download_url;
+  link.textContent = "Baixar";
+  atual.replaceWith(link);
+  caixa.querySelector(".tam").textContent = tamanhoLegivel(arquivo.size);
+  caixa.classList.add("pronto");
+}
+
+function aguardando(id) {
+  const caixa = document.getElementById(id);
+  if (!caixa || caixa.classList.contains("pronto")) return;
+  const atual = caixa.querySelector(".botao");
+  const aviso = document.createElement("span");
+  aviso.className = "botao botao-linha desligado";
+  aviso.setAttribute("aria-disabled", "true");
+  aviso.textContent = "Em breve";
+  atual.replaceWith(aviso);
 }
 
 async function buscarVersao() {
@@ -68,31 +98,30 @@ async function buscarVersao() {
       headers: { Accept: "application/vnd.github+json" },
     });
     if (resp.status === 404) {
-      estado.textContent = "Ainda não há uma versão publicada. Assim que o instalador for lançado, o botão abaixo passa a baixar o arquivo direto.";
+      estado.textContent = "Ainda não há uma versão publicada. Assim que os instaladores saírem, os botões abaixo passam a baixar o arquivo direto.";
+      PLATAFORMAS.forEach((p) => aguardando(p.id));
       return;
     }
     if (!resp.ok) throw new Error("status " + resp.status);
 
     const release = await resp.json();
-    const instalador = (release.assets || []).find((a) => a.name.toLowerCase().endsWith("-setup.exe"))
-      || (release.assets || []).find((a) => a.name.toLowerCase().endsWith(".exe"));
-    if (!instalador) {
-      estado.textContent = `A versão ${release.tag_name} foi publicada, mas ainda sem o instalador. Veja a página de versões.`;
+    const arquivos = release.assets || [];
+    let algum = false;
+    PLATAFORMAS.forEach((p) => {
+      const arquivo = arquivos.find((a) => p.acha(a.name.toLowerCase()));
+      if (arquivo) { ligar(p.id, arquivo); algum = true; } else aguardando(p.id);
+    });
+    if (!algum) {
+      estado.textContent = `A versão ${release.tag_name} foi publicada, mas ainda sem instaladores. Veja todas as versões.`;
       return;
     }
-
     document.getElementById("r-versao").textContent = release.tag_name;
     document.getElementById("r-data").textContent = new Date(release.published_at)
       .toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
-    document.getElementById("r-tamanho").textContent = tamanhoLegivel(instalador.size);
-    // A nota abaixo do botão usa o mesmo tamanho real do arquivo publicado na Release.
-    document.getElementById("r-tamanho-nota").textContent = `tem ${tamanhoLegivel(instalador.size)} e `;
-    botao.href = instalador.browser_download_url;
-    botao.textContent = "Baixar para Windows";
-    estado.textContent = "Versão mais recente, pronta para instalar.";
+    estado.textContent = "Versão mais recente, pronta para instalar. Escolha o seu sistema.";
     detalhes.hidden = false;
   } catch (e) {
-    estado.textContent = "Não deu para consultar o GitHub agora. O botão abaixo leva à página de versões, onde o instalador fica.";
+    estado.textContent = "Não deu para consultar o GitHub agora. Os botões levam à página de versões, onde ficam os instaladores.";
   }
 }
 
