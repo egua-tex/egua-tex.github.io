@@ -1,6 +1,6 @@
 # Avaliações do site
 
-As avaliações enviadas pelo site (nome, nota de 1 a 5 e comentário) ficam numa planilha Google. Nada além disso é pedido a quem avalia, e a avaliação aparece no site assim que é enviada.
+As avaliações enviadas pelo site (nome, nota de 1 a 5 e comentário) ficam numa planilha Google. Nada além disso é pedido a quem avalia. Cada avaliação chega na planilha com a caixa "Aprovada" desmarcada e só aparece no site depois que a caixa é marcada.
 
 ## Como ligar (uma vez só)
 
@@ -10,7 +10,11 @@ As avaliações enviadas pelo site (nome, nota de 1 a 5 e comentário) ficam num
 4. Clique em **Implantar**, depois **Nova implantação**. Em "Tipo", escolha **App da Web**. Em "Executar como", deixe **Eu**. Em "Quem pode acessar", escolha **Qualquer pessoa**. Clique em **Implantar** e autorize.
 5. Copie o endereço que termina em `/exec` e coloque em `assets/js/config.js`, no campo `servidorAvaliacoes`.
 
-A aba "Avaliações", com o cabeçalho Data, Nome, Nota e Comentário, aparece sozinha na primeira avaliação.
+A aba "Avaliações", com o cabeçalho Data, Nome, Nota, Comentário e Aprovada, aparece sozinha na primeira avaliação.
+
+## Aprovar uma avaliação
+
+Marque a caixa da coluna "Aprovada" na linha dela. Ela entra no site em seguida, e a média passa a contar com ela. Para tirar do site sem apagar, desmarque a caixa.
 
 ## Apagar uma avaliação
 

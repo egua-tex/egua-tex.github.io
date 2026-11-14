@@ -1,6 +1,6 @@
 // ÉguaTex: seção de avaliações da página inicial (média, lista e formulário).
 // As avaliações ficam numa planilha Google (servidor-avaliacoes/Codigo.gs). O endereço do app da Web
-// fica em assets/js/config.js; sem endereço, a seção fica escondida. Para apagar, apague a linha na planilha.
+// fica em assets/js/config.js; sem endereço, a seção fica escondida. Só aparecem as avaliações marcadas como aprovadas na planilha.
 
 (() => {
   const secao = document.getElementById("avaliacoes");
@@ -100,7 +100,6 @@
       if (status >= 400) { mostrarAviso(corpo.erro || "Não deu para enviar. Confira os campos.", "erro"); return; }
       form.reset(); marcar(""); contador.textContent = "0 de 1000";
       mostrarAviso("Avaliação enviada. Obrigado por contar o que achou do ÉguaTex!", "certo");
-      carregar();
     } catch {
       mostrarAviso("Sem conexão com o servidor. Confira a internet e tente de novo.", "erro");
     } finally {

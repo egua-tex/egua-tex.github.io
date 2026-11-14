@@ -1,21 +1,23 @@
 /**
  * ÉguaTex: servidor das avaliações do site, guardadas numa planilha Google.
  *
- * GET  -> lista as avaliações (nome, nota, comentário e data), com média e total
- * POST -> recebe { nome, nota, comentario } e grava uma linha nova
+ * GET  -> lista as avaliações aprovadas (nome, nota, comentário e data), com média e total
+ * POST -> recebe { nome, nota, comentario } e grava uma linha nova, ainda sem aprovação
  *
- * Para apagar uma avaliação, apague a linha dela na planilha.
+ * Para mostrar uma avaliação no site, marque a caixa da coluna "Aprovada".
+ * Para apagar, apague a linha dela na planilha.
  */
 
 const ABA = 'Avaliações';
-const CABECALHO = ['Data', 'Nome', 'Nota', 'Comentário'];
+const CABECALHO = ['Data', 'Nome', 'Nota', 'Comentário', 'Aprovada'];
+const COLUNA_APROVADA = 5;
 const LIMITES = { nome: [2, 60], comentario: [5, 1000] };
 const ENVIOS_POR_MINUTO = 10;
 const MAXIMO_NA_LISTA = 100;
 
 function doGet() {
   const linhas = aba_().getDataRange().getValues().slice(1)
-    .filter(function (l) { return l[0] && l[1] && l[2]; });
+    .filter(function (l) { return l[0] && l[1] && l[2] && l[4] === true; });
 
   const avaliacoes = linhas.map(function (l, i) {
     return {
@@ -76,7 +78,9 @@ function doPost(e) {
   const trava = LockService.getScriptLock();
   trava.waitLock(10000);
   try {
-    aba_().appendRow([new Date(), protegido_(nome), nota, protegido_(comentario)]);
+    const aba = aba_();
+    aba.appendRow([new Date(), protegido_(nome), nota, protegido_(comentario), false]);
+    aba.getRange(aba.getLastRow(), COLUNA_APROVADA).insertCheckboxes();
   } finally {
     trava.releaseLock();
   }
@@ -95,6 +99,11 @@ function aba_() {
     aba.setFrozenRows(1);
     aba.getRange(1, 1, 1, CABECALHO.length).setFontWeight('bold');
     aba.setColumnWidth(4, 520);
+  }
+  // Planilhas criadas antes da coluna "Aprovada" ganham a coluna aqui.
+  if (aba.getRange(1, COLUNA_APROVADA).getValue() !== 'Aprovada') {
+    aba.getRange(1, COLUNA_APROVADA).setValue('Aprovada').setFontWeight('bold');
+    if (aba.getLastRow() > 1) aba.getRange(2, COLUNA_APROVADA, aba.getLastRow() - 1, 1).insertCheckboxes();
   }
   return aba;
 }
