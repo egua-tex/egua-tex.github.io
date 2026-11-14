@@ -85,6 +85,8 @@ async function buscarVersao() {
     document.getElementById("r-data").textContent = new Date(release.published_at)
       .toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
     document.getElementById("r-tamanho").textContent = tamanhoLegivel(instalador.size);
+    // A nota abaixo do botão usa o mesmo tamanho real do arquivo publicado na Release.
+    document.getElementById("r-tamanho-nota").textContent = `tem ${tamanhoLegivel(instalador.size)} e `;
     botao.href = instalador.browser_download_url;
     botao.textContent = "Baixar para Windows";
     estado.textContent = "Versão mais recente, pronta para instalar.";
