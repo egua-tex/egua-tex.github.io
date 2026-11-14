@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Templates | ÉguaTex</title>
+  <meta name="description" content="Templates LaTeX do ÉguaTex em português: TCC no padrão ABNT, artigos, teses, slides, pôsteres, currículos, ofícios e mais.">
+  <meta name="theme-color" content="#1c0a2b">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261114a">
+  <script>
+    document.documentElement.classList.add("js");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("calmo");
+  </script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <a class="marca" href="index.html" aria-label="ÉguaTex, início">
+      <img src="assets/img/curupira-256.png" alt="" width="40" height="40">
+      <span>ÉguaTex</span>
+    </a>
+    <nav aria-label="Seções">
+      <a href="index.html#portal">Como funciona</a>
+      <a href="index.html#fogueira">Experimente</a>
+      <a href="index.html#instalar">Instalar</a>
+      <a href="index.html#curupira">O curupira</a>
+      <a href="templates.html" aria-current="page">Templates</a>
+      <a href="contato.html">Contato</a>
+      <a class="nav-baixar" href="index.html#baixar">Baixar</a>
+    </nav>
+  </header>
+
+  <main id="conteudo" class="galeria">
+    <section class="galeria-abertura" aria-labelledby="galeria-titulo">
+      <h1 id="galeria-titulo">Templates</h1>
+
+      <form class="galeria-busca" role="search" id="busca-form">
+        <label for="busca" class="sr">Procurar categoria</label>
+        <input id="busca" type="search" placeholder="Procurar: TCC, slides, ofício…" autocomplete="off">
+      </form>
+    </section>
+
+    <div class="faixa-classes" aria-hidden="true"><div class="faixa-trilho"><span>\documentclass{abntex2}</span> <span>\documentclass{article}</span> <span>\documentclass{beamer}</span> <span>\documentclass{tikzposter}</span> <span>\documentclass{report}</span> <span>\documentclass{exam}</span> <span>\documentclass{moderncv}</span> <span>\documentclass{book}</span> <span>\documentclass{memoir}</span> <span>\documentclass{letter}</span> <span>\documentclass{sbc-template}</span> <span>\documentclass{beamerposter}</span><span>\documentclass{abntex2}</span> <span>\documentclass{article}</span> <span>\documentclass{beamer}</span> <span>\documentclass{tikzposter}</span> <span>\documentclass{report}</span> <span>\documentclass{exam}</span> <span>\documentclass{moderncv}</span> <span>\documentclass{book}</span> <span>\documentclass{memoir}</span> <span>\documentclass{letter}</span> <span>\documentclass{sbc-template}</span> <span>\documentclass{beamerposter}</span></div></div>
+
+    <section aria-labelledby="categorias-titulo">
+      <div class="galeria-cabeca">
+        <h2 id="categorias-titulo" class="galeria-subtitulo">Categorias</h2>
+        <div class="filtros" role="group" aria-label="Filtrar categorias">
+          <button type="button" data-filtro="todas" aria-pressed="true">Todas</button>
+          <button type="button" data-filtro="pesquisa" aria-pressed="false">Pesquisa</button>
+          <button type="button" data-filtro="eventos" aria-pressed="false">Eventos</button>
+          <button type="button" data-filtro="ensino" aria-pressed="false">Ensino</button>
+          <button type="button" data-filtro="trabalho" aria-pressed="false">Trabalho</button>
+        </div>
+      </div>
+      <ul class="categorias" id="categorias">
+
+        <li class="categoria" data-busca="tcc monografia trabalho de conclusao abnt capa folha de rosto graduacao" data-grupo="pesquisa" data-classe="abntex2" data-trecho="\documentclass{abntex2}|\titulo{Meu TCC}|\autor{Seu nome}|\instituicao{UFPA}|\imprimircapa">
+          <div class="cat-arte cor-roxo" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="papel"><rect x="104" y="18" width="112" height="164" rx="4"/></g>
+              <rect class="tinta" x="128" y="32" width="64" height="5" rx="2.5"/><rect class="traco" x="138" y="42" width="44" height="4" rx="2"/>
+              <rect class="destaque" x="120" y="84" width="80" height="9" rx="4.5"/><rect class="traco" x="130" y="99" width="60" height="5" rx="2.5"/>
+              <rect class="traco" x="140" y="150" width="40" height="4" rx="2"/><rect class="tinta" x="146" y="160" width="28" height="4" rx="2"/></svg>
+          </div>
+          <h3>TCC e monografias</h3>
+          <p>Capa, folha de rosto, sumário e referências no padrão da ABNT.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">abntex2</code></div>
+        </li>
+
+        <li class="categoria" data-busca="artigo cientifico revista periodico anais congresso paper duas colunas" data-grupo="pesquisa" data-classe="article" data-trecho="\documentclass{article}|\title{Título do artigo}|\begin{abstract}|  Resumo em até 250 palavras.|\end{abstract}">
+          <div class="cat-arte cor-verde" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="papel"><rect x="92" y="14" width="136" height="172" rx="4"/></g>
+              <rect class="tinta" x="112" y="28" width="96" height="7" rx="3.5"/><rect class="traco" x="128" y="40" width="64" height="4" rx="2"/>
+              <rect class="caixa" x="108" y="52" width="104" height="22" rx="3"/>
+              <g class="traco"><rect x="108" y="84" width="48" height="4" rx="2"/><rect x="108" y="93" width="48" height="4" rx="2"/><rect x="108" y="102" width="40" height="4" rx="2"/><rect x="108" y="116" width="48" height="4" rx="2"/><rect x="108" y="125" width="48" height="4" rx="2"/><rect x="108" y="134" width="30" height="4" rx="2"/>
+              <rect x="164" y="84" width="48" height="4" rx="2"/><rect x="164" y="93" width="44" height="4" rx="2"/><rect x="164" y="138" width="48" height="4" rx="2"/><rect x="164" y="147" width="48" height="4" rx="2"/><rect x="164" y="156" width="36" height="4" rx="2"/></g>
+              <rect class="destaque" x="164" y="102" width="48" height="28" rx="3"/></svg>
+          </div>
+          <h3>Artigos científicos</h3>
+          <p>Para revistas, periódicos e anais de congresso, em uma ou duas colunas.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">article</code></div>
+        </li>
+
+        <li class="categoria" data-busca="dissertacao tese mestrado doutorado capitulos pos-graduacao" data-grupo="pesquisa" data-classe="abntex2" data-trecho="\documentclass{abntex2}|\tipotrabalho{Tese}|\chapter{Introdução}|\listoffigures|\listoftables">
+          <div class="cat-arte cor-fogo" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="lombadas">
+              <rect class="l1" x="96" y="40" width="30" height="140" rx="3"/><rect class="l2" x="130" y="22" width="36" height="158" rx="3"/>
+              <rect class="l3" x="170" y="48" width="26" height="132" rx="3"/><rect class="l4" x="200" y="34" width="32" height="146" rx="3" transform="rotate(8 216 180)"/></g>
+              <g class="tinta"><rect x="139" y="40" width="18" height="4" rx="2"/><rect x="139" y="150" width="18" height="4" rx="2"/><rect x="103" y="56" width="16" height="4" rx="2"/></g></svg>
+          </div>
+          <h3>Dissertações e teses</h3>
+          <p>Capítulos, listas de figuras e tabelas, apêndices e anexos.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">abntex2</code></div>
+        </li>
+
+        <li class="categoria" data-busca="resumo evento congresso simples expandido semana academica palavras-chave" data-grupo="eventos" data-classe="article" data-trecho="\documentclass{article}|\section*{Resumo}|Objetivo, método e|resultados principais.|\textbf{Palavras-chave:}">
+          <div class="cat-arte cor-brasa" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="papel"><rect x="76" y="40" width="168" height="120" rx="4"/></g>
+              <rect class="tinta" x="100" y="56" width="120" height="7" rx="3.5"/><rect class="traco" x="124" y="68" width="72" height="4" rx="2"/>
+              <g class="traco"><rect x="96" y="84" width="128" height="4" rx="2"/><rect x="96" y="93" width="128" height="4" rx="2"/><rect x="96" y="102" width="128" height="4" rx="2"/><rect x="96" y="111" width="90" height="4" rx="2"/></g>
+              <rect class="destaque" x="96" y="128" width="36" height="12" rx="6"/><rect class="caixa" x="138" y="128" width="44" height="12" rx="6"/><rect class="destaque2" x="188" y="128" width="32" height="12" rx="6"/></svg>
+          </div>
+          <h3>Resumos para eventos</h3>
+          <p>Resumo simples e expandido para congressos e semanas acadêmicas.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">article</code></div>
+        </li>
+
+        <li class="categoria" data-busca="apresentacao slides beamer defesa aula seminario" data-grupo="eventos" data-classe="beamer" data-trecho="\documentclass{beamer}|\begin{frame}|  \frametitle{Resultados}|  \pause|\end{frame}">
+          <div class="cat-arte cor-verde" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="papel"><rect x="56" y="34" width="208" height="117" rx="6"/></g>
+              <rect class="faixa-slide" x="56" y="34" width="208" height="24" rx="6"/><rect class="faixa-slide" x="56" y="46" width="208" height="12"/>
+              <rect class="papel-claro" x="72" y="41" width="96" height="8" rx="4"/>
+              <circle class="destaque" cx="80" cy="76" r="4"/><rect class="traco" x="92" y="73" width="96" height="5" rx="2.5"/>
+              <circle class="destaque" cx="80" cy="94" r="4"/><rect class="traco" x="92" y="91" width="80" height="5" rx="2.5"/>
+              <circle class="destaque" cx="80" cy="112" r="4"/><rect class="traco" x="92" y="109" width="88" height="5" rx="2.5"/>
+              <rect class="caixa" x="200" y="70" width="48" height="56" rx="4"/>
+              <rect class="pe-tela" x="148" y="151" width="24" height="16"/><rect class="pe-tela" x="124" y="165" width="72" height="8" rx="4"/></svg>
+          </div>
+          <h3>Apresentações</h3>
+          <p>Slides em Beamer para defesas, aulas e seminários.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">beamer</code></div>
+        </li>
+
+        <li class="categoria" data-busca="poster banner evento academico pôster" data-grupo="eventos" data-classe="tikzposter" data-trecho="\documentclass{tikzposter}|\title{Minha pesquisa}|\block{Metodologia}{...}|\block{Resultados}{...}">
+          <div class="cat-arte cor-roxo" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="papel"><rect x="110" y="10" width="100" height="180" rx="4"/></g>
+              <rect class="destaque" x="110" y="10" width="100" height="30" rx="4"/><rect class="destaque" x="110" y="26" width="100" height="14"/>
+              <rect class="papel-claro" x="124" y="20" width="72" height="7" rx="3.5"/>
+              <rect class="caixa" x="120" y="50" width="38" height="44" rx="3"/><rect class="caixa2" x="162" y="50" width="38" height="28" rx="3"/>
+              <g class="traco"><rect x="162" y="84" width="38" height="4" rx="2"/><rect x="120" y="102" width="38" height="4" rx="2"/><rect x="120" y="111" width="30" height="4" rx="2"/><rect x="162" y="94" width="30" height="4" rx="2"/></g>
+              <rect class="caixa2" x="120" y="124" width="80" height="36" rx="3"/><g class="traco"><rect x="120" y="168" width="80" height="4" rx="2"/><rect x="120" y="177" width="56" height="4" rx="2"/></g></svg>
+          </div>
+          <h3>Pôsteres</h3>
+          <p>Banners acadêmicos para apresentar sua pesquisa em eventos.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">tikzposter</code></div>
+        </li>
+
+        <li class="categoria" data-busca="relatorio estagio pesquisa tecnico iniciacao cientifica pibic" data-grupo="pesquisa" data-classe="report" data-trecho="\documentclass{report}|\chapter{Atividades}|\includegraphics{grafico}|\section{Conclusão}">
+          <div class="cat-arte cor-fogo" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="papel"><rect x="100" y="16" width="120" height="168" rx="4"/></g>
+              <rect class="tinta" x="116" y="30" width="72" height="6" rx="3"/>
+              <g class="traco"><rect x="116" y="44" width="88" height="4" rx="2"/><rect x="116" y="53" width="80" height="4" rx="2"/></g>
+              <rect class="caixa" x="116" y="66" width="88" height="62" rx="3"/>
+              <rect class="destaque" x="126" y="104" width="12" height="18" rx="2"/><rect class="destaque2" x="144" y="90" width="12" height="32" rx="2"/><rect class="destaque" x="162" y="80" width="12" height="42" rx="2"/><rect class="destaque2" x="180" y="96" width="12" height="26" rx="2"/>
+              <g class="traco"><rect x="116" y="140" width="88" height="4" rx="2"/><rect x="116" y="149" width="88" height="4" rx="2"/><rect x="116" y="158" width="60" height="4" rx="2"/></g></svg>
+          </div>
+          <h3>Relatórios</h3>
+          <p>Relatórios de estágio, de iniciação científica e técnicos.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">report</code></div>
+        </li>
+
+        <li class="categoria" data-busca="prova lista de exercicios questoes gabarito professor escola" data-grupo="ensino" data-classe="exam" data-trecho="\documentclass{exam}|\begin{questions}|\question Calcule a área.|\choice 12 \CorrectChoice 16|\end{questions}">
+          <div class="cat-arte cor-brasa" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="papel"><rect x="100" y="16" width="120" height="168" rx="4"/></g>
+              <rect class="caixa" x="112" y="26" width="96" height="16" rx="3"/>
+              <g><text class="numero" x="114" y="64">1.</text><rect class="traco" x="128" y="57" width="76" height="5" rx="2.5"/>
+              <rect class="marca-q" x="130" y="70" width="8" height="8" rx="2"/><rect class="traco" x="142" y="72" width="40" height="4" rx="2"/>
+              <rect class="marca-q ok" x="130" y="82" width="8" height="8" rx="2"/><rect class="traco" x="142" y="84" width="48" height="4" rx="2"/>
+              <text class="numero" x="114" y="114">2.</text><rect class="traco" x="128" y="107" width="70" height="5" rx="2.5"/>
+              <rect class="linha-resp" x="128" y="124" width="76" height="2"/><rect class="linha-resp" x="128" y="136" width="76" height="2"/>
+              <text class="numero" x="114" y="164">3.</text><rect class="traco" x="128" y="157" width="64" height="5" rx="2.5"/></g></svg>
+          </div>
+          <h3>Provas e listas de exercícios</h3>
+          <p>Questões numeradas, alternativas, espaço para resposta e gabarito.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">exam</code></div>
+        </li>
+
+        <li class="categoria" data-busca="curriculo cv lattes academico profissional emprego" data-grupo="trabalho" data-classe="moderncv" data-trecho="\documentclass{moderncv}|\name{Seu}{Nome}|\section{Formação}|\cventry{2026}{Graduação}{UFPA}">
+          <div class="cat-arte cor-roxo" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="papel"><rect x="96" y="16" width="128" height="168" rx="4"/></g>
+              <rect class="destaque" x="96" y="16" width="40" height="168" rx="4"/><rect class="destaque" x="120" y="16" width="16" height="168"/>
+              <circle class="papel-claro" cx="116" cy="44" r="13"/>
+              <g class="papel-claro"><rect x="104" y="68" width="24" height="4" rx="2"/><rect x="104" y="77" width="20" height="4" rx="2"/><rect x="104" y="96" width="24" height="4" rx="2"/><rect x="104" y="105" width="18" height="4" rx="2"/></g>
+              <rect class="tinta" x="146" y="30" width="62" height="7" rx="3.5"/><rect class="traco" x="146" y="42" width="44" height="4" rx="2"/>
+              <rect class="destaque2" x="146" y="60" width="30" height="5" rx="2.5"/><g class="traco"><rect x="146" y="70" width="64" height="4" rx="2"/><rect x="146" y="79" width="56" height="4" rx="2"/></g>
+              <rect class="destaque2" x="146" y="98" width="30" height="5" rx="2.5"/><g class="traco"><rect x="146" y="108" width="64" height="4" rx="2"/><rect x="146" y="117" width="48" height="4" rx="2"/><rect x="146" y="126" width="60" height="4" rx="2"/></g></svg>
+          </div>
+          <h3>Currículos</h3>
+          <p>Currículo acadêmico e profissional, para bolsas, seleções e empregos.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">moderncv</code></div>
+        </li>
+
+        <li class="categoria" data-busca="oficio documento oficial requerimento memorando declaracao servico publico prefeitura" data-grupo="trabalho" data-classe="letter" data-trecho="\documentclass{letter}|\address{Prefeitura}|\opening{Senhor(a) Secretário(a),}|\closing{Atenciosamente,}">
+          <div class="cat-arte cor-verde" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="papel"><rect x="100" y="16" width="120" height="168" rx="4"/></g>
+              <circle class="destaque" cx="160" cy="36" r="10"/><circle class="papel-claro" cx="160" cy="36" r="5"/>
+              <rect class="tinta" x="128" y="52" width="64" height="4" rx="2"/>
+              <rect class="tinta" x="112" y="68" width="52" height="5" rx="2.5"/><rect class="traco" x="176" y="68" width="32" height="5" rx="2.5"/>
+              <g class="traco"><rect x="112" y="86" width="96" height="4" rx="2"/><rect x="112" y="95" width="96" height="4" rx="2"/><rect x="112" y="104" width="96" height="4" rx="2"/><rect x="112" y="113" width="64" height="4" rx="2"/></g>
+              <path class="assinatura" d="M134 146c8-10 12 6 18-2s8-8 12 0 10 0 14-6"/><rect class="tinta" x="128" y="154" width="64" height="2"/><rect class="traco" x="138" y="162" width="44" height="4" rx="2"/></svg>
+          </div>
+          <h3>Ofícios e documentos oficiais</h3>
+          <p>Ofícios, requerimentos, memorandos e declarações no padrão de órgão público.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">letter</code></div>
+        </li>
+
+        <li class="categoria" data-busca="livro apostila material de curso capitulos ebook" data-grupo="ensino" data-classe="book" data-trecho="\documentclass{book}|\chapter{Primeiros passos}|\section*{Exercícios}|\tableofcontents">
+          <div class="cat-arte cor-fogo" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="papel"><path d="M160 46c-26-14-56-14-84-6v128c28-8 58-8 84 6z"/><path d="M160 46c26-14 56-14 84-6v128c-28-8-58-8-84 6z"/></g>
+              <rect class="dobra" x="158" y="46" width="4" height="128"/>
+              <rect class="tinta" x="94" y="60" width="44" height="6" rx="3"/><g class="traco"><rect x="92" y="76" width="54" height="4" rx="2"/><rect x="92" y="85" width="54" height="4" rx="2"/><rect x="92" y="94" width="50" height="4" rx="2"/><rect x="92" y="103" width="54" height="4" rx="2"/><rect x="92" y="112" width="40" height="4" rx="2"/></g>
+              <rect class="caixa" x="176" y="60" width="52" height="40" rx="3"/><g class="traco"><rect x="176" y="110" width="52" height="4" rx="2"/><rect x="176" y="119" width="48" height="4" rx="2"/><rect x="176" y="128" width="52" height="4" rx="2"/></g></svg>
+          </div>
+          <h3>Livros e apostilas</h3>
+          <p>Capítulos, exercícios no fim de cada parte e materiais de curso.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">book</code></div>
+        </li>
+
+        <li class="categoria" data-busca="fichamento resenha resumo de leitura citacao biblioteconomia" data-grupo="pesquisa" data-classe="abntex2" data-trecho="\documentclass{abntex2}|\begin{citacao}|  Trecho citado (p. 42).|\end{citacao}|Comentário crítico.">
+          <div class="cat-arte cor-brasa" aria-hidden="true">
+            <svg viewBox="0 0 320 200"><g class="papel"><rect x="88" y="34" width="144" height="132" rx="4" transform="rotate(-4 160 100)"/></g>
+              <g transform="rotate(-4 160 100)"><rect class="destaque2" x="104" y="48" width="56" height="6" rx="3"/>
+              <rect class="caixa" x="104" y="62" width="112" height="22" rx="3"/><text class="aspas" x="108" y="80">“</text>
+              <g class="traco"><rect x="122" y="70" width="86" height="4" rx="2"/><rect x="104" y="96" width="112" height="4" rx="2"/><rect x="104" y="105" width="112" height="4" rx="2"/><rect x="104" y="114" width="90" height="4" rx="2"/><rect x="104" y="132" width="112" height="4" rx="2"/><rect x="104" y="141" width="70" height="4" rx="2"/></g></g></svg>
+          </div>
+          <h3>Fichamentos e resenhas</h3>
+          <p>Fichamento com citações e páginas, resenha crítica e resumo de leitura.</p>
+          <div class="cat-rodape"><span class="em-breve">Em breve</span><code class="cat-classe">abntex2</code></div>
+        </li>
+      </ul>
+
+      <p class="galeria-vazia" id="busca-vazia" hidden>Nenhuma categoria com esse nome. Que tal <a href="contato.html">sugerir esse template</a>?</p>
+    </section>
+
+    <section class="galeria-sugestao" aria-labelledby="sugestao-titulo">
+      <h2 id="sugestao-titulo">Sentiu falta de algum template?</h2>
+      <p>Conte qual modelo você usa na sua universidade, curso ou trabalho. As sugestões ajudam a decidir o que entra primeiro.</p>
+      <a class="botao botao-fogo" href="contato.html">Sugerir um template</a>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-faixa" aria-hidden="true"></div>
+    <div class="rodape-conteudo">
+      <p class="rodape-marca"><img src="assets/img/curupira-256.png" alt="" width="32" height="32"> ÉguaTex</p>
+      <p>Feito no Pará por Jéssica Melo e José Paulo de Almeida Junior.</p>
+      <p><a href="contato.html">Contato, sugestões e problemas</a>, <a href="instalar-latex.html">outras distribuições LaTeX</a>, <a href="privacidade.html">política de privacidade</a> e <a href="termos.html">termos de uso</a>.</p>
+    </div>
+  </footer>
+
+  <script defer src="assets/js/galeria.js?v=20261114a"></script>
+  <script defer src="assets/js/config.js?v=20261114a"></script>
+  <script defer src="assets/js/navegacao.js?v=20261114a"></script>
+</body>
+</html>

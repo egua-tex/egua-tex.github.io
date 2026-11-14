@@ -75,7 +75,7 @@
   rolar();
 
   /* equação do PDF com KaTeX, se ele carregou */
-  if (window.katex) katex.render("Q = A \\cdot v", document.getElementById("eq-pdf"), { throwOnError: false });
+  if (window.katex) { const eq = document.getElementById("eq-pdf"); katex.render(eq.dataset.tex, eq, { throwOnError: false, displayMode: true }); }
 
 
   /* ---------- topo: encolhe e mostra progresso da leitura ---------- */

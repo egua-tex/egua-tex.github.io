@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ÉguaTex: editor LaTeX para Windows, feito no Pará</title>
+  <title>ÉguaTex: editor LaTeX feito no Pará</title>
   <meta name="description" content="ÉguaTex é um editor LaTeX gratuito e offline para Windows, criado na Amazônia. Baixe o instalador e experimente fórmulas direto no navegador.">
   <meta name="theme-color" content="#1c0a2b">
   <link rel="icon" type="image/png" href="favicon.png">
@@ -15,8 +15,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/dinamico.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261114a">
+  <link rel="stylesheet" href="assets/css/dinamico.css?v=20261114a">
   <script>
     /* Antes de pintar a página: liga as animações só com JavaScript e respeita quem pede menos movimento. */
     document.documentElement.classList.add("js");
@@ -36,6 +36,7 @@
       <a href="#fogueira">Experimente</a>
       <a href="#instalar">Instalar</a>
       <a href="#curupira">O curupira</a>
+      <a href="templates.html">Templates</a>
       <a href="contato.html">Contato</a>
       <a class="nav-baixar" href="#baixar">Baixar</a>
     </nav>
@@ -46,8 +47,8 @@
       <canvas class="vagalumes" aria-hidden="true"></canvas>
       <div class="abertura-texto">
         <h1 class="palavra" id="titulo" aria-label="ÉguaTex"><span class="acento">É</span>guaTex</h1>
-        <p class="lema" id="lema">Escreva LaTeX no computador, de qualquer canto da Amazônia, mesmo sem internet.</p>
-        <p class="apoio">Um programa para Windows que escreve e compila TCC, artigos e relatórios, com o PDF ao lado do texto. O compilador LaTeX já vem junto. Gratuito, em português e feito no Pará.</p>
+        <p class="lema" id="lema">Escreva LaTeX de qualquer canto da Amazônia, mesmo sem internet.</p>
+        <p class="apoio">Um programa que escreve e compila TCC, artigos e relatórios, com o PDF ao lado do texto. O compilador LaTeX já vem junto. Gratuito, em português e feito no Pará.</p>
         <div class="acoes">
           <a class="botao botao-fogo" href="#baixar">Baixar para Windows</a>
           <a class="botao botao-linha" href="#portal">Ver como funciona</a>
@@ -79,33 +80,29 @@
 
           <div class="palco">
             <div class="cartao" id="cartao">
-              <div class="face face-codigo" aria-label="Exemplo de código LaTeX de um TCC"><span class="cmd">\documentclass</span>{<span class="arg">abntex2</span>}
-  <span class="cmd">\title</span>{<span class="arg">Vazão do rio Guamá</span>}
-  <span class="cmd">\author</span>{<span class="arg">Paulo Almeida</span>}
-
-  <span class="cmd">\begin</span>{<span class="arg">document</span>}
-  <span class="cmd">\maketitle</span>
-
-  <span class="cmd">\section</span>{<span class="arg">Introdução</span>}
-  A vazão de um rio é
-  dada por
-
-  <span class="cmd">\begin</span>{<span class="arg">equation</span>}
-    Q = A \cdot v
-  <span class="cmd">\end</span>{<span class="arg">equation</span>}
-
-  <span class="cmd">\end</span>{<span class="arg">document</span>}<span class="cursor"></span></div>
+              <div class="face face-codigo" aria-label="Exemplo de código LaTeX de um texto sobre a pororoca"><span class="cmd">\documentclass</span>{<span class="arg">article</span>}
+<span class="cmd">\title</span>{<span class="arg">A pororoca do Guamá</span>}
+<span class="cmd">\author</span>{<span class="arg">Paulo Almeida</span>}
+<span class="cmd">\begin</span>{<span class="arg">document</span>}
+<span class="cmd">\maketitle</span>
+<span class="cmd">\section</span>{<span class="arg">Introdução</span>}
+A pororoca é uma onda de
+maré que sobe o rio Guamá.
+Ela nasce da atração entre
+a Terra e a Lua, dada pela
+lei de Newton:
+<span class="cmd">\begin</span>{<span class="arg">equation</span>}
+  F = G \frac{M_T M_L}{d^2}
+<span class="cmd">\end</span>{<span class="arg">equation</span>}
+<span class="cmd">\end</span>{<span class="arg">document</span>}<span class="cursor"></span></div>
 
               <div class="face face-pdf" aria-label="O mesmo texto compilado em PDF">
-                <p class="pdf-titulo">Vazão do rio Guamá</p>
+                <p class="pdf-titulo">A pororoca do Guamá</p>
                 <p class="pdf-autor">Paulo Almeida</p>
                 <p class="pdf-local">Belém, 2026</p>
-                <p class="pdf-secao">1 INTRODUÇÃO</p>
-                <p class="pdf-p">A vazão de um rio é dada por</p>
-                <div class="pdf-eq"><span id="eq-pdf">Q = A · v</span><span class="num">(1)</span></div>
-                <div class="pdf-linha"></div>
-                <div class="pdf-linha"></div>
-                <div class="pdf-linha" style="width:72%"></div>
+                <p class="pdf-secao">1 Introdução</p>
+                <p class="pdf-p">A pororoca é uma onda de maré que sobe o rio Guamá. Ela nasce da atração entre a Terra e a Lua, dada pela lei de Newton:</p>
+                <div class="pdf-eq"><span id="eq-pdf" data-tex="F = G\,\frac{M_T\,M_L}{d^2}">F = G·M<sub>T</sub>·M<sub>L</sub> / d²</span><span class="num">(1)</span></div>
                 <p class="pdf-pagina">1</p>
               </div>
             </div>
@@ -114,7 +111,7 @@
           <div class="legenda legenda-dir">
             <div id="leg-b" class="some">
               <h2>e o ÉguaTex entrega o PDF</h2>
-              <p>Um clique em Compilar e a página sai pronta, no padrão da ABNT, ao lado do texto.</p>
+              <p>Um clique em Compilar e a página sai pronta, ao lado do texto.</p>
             </div>
           </div>
         </div>
@@ -259,11 +256,11 @@
     </div>
   </footer>
 
-  <script defer src="assets/js/config.js"></script>
-  <script defer src="assets/js/navegacao.js"></script>
+  <script defer src="assets/js/config.js?v=20261114a"></script>
+  <script defer src="assets/js/navegacao.js?v=20261114a"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-  <script defer src="assets/js/main.js"></script>
-  <script defer src="assets/js/dinamico.js"></script>
-  <script defer src="assets/js/avaliacoes.js"></script>
+  <script defer src="assets/js/main.js?v=20261114a"></script>
+  <script defer src="assets/js/dinamico.js?v=20261114a"></script>
+  <script defer src="assets/js/avaliacoes.js?v=20261114a"></script>
 </body>
 </html>

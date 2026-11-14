@@ -81,7 +81,7 @@ html, body { background: var(--noite); }
   box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 40px rgba(255,160,60,.08);
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   padding: 18px 16px;
-  font-family: var(--fonte-codigo); font-size: clamp(.62rem, 1.05vw, .8rem); line-height: 1.75;
+  font-family: var(--fonte-codigo); font-size: clamp(.6rem, 1vw, .76rem); line-height: 1.6;
   color: var(--verde-claro); white-space: pre; overflow: hidden;
 }
 .face-codigo .cmd { color: var(--chama); }
@@ -190,3 +190,5 @@ html, body { background: var(--noite); }
 .calmo .legenda-dir .some { display: none; }
 .calmo .cartao { transform: none; width: auto; height: auto; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
 .calmo .face { position: relative; width: 240px; height: 360px; transform: none; backface-visibility: visible; }
+.pdf-eq .katex-display { margin: 0; }
+.pdf-eq .katex { font-size: 1.05em; }
