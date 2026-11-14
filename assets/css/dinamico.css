@@ -12,7 +12,7 @@ html, body { background: var(--noite); }
 
 /* ---------- abertura com entrada desfocada ---------- */
 .abertura-figura { perspective: 900px; }
-.abertura-figura img { transition: transform .25s ease-out; will-change: transform; }
+.abertura-figura .logo-viva { transition: transform .25s ease-out; will-change: transform; }
 .brasa { transition: transform .35s ease-out; animation: acender 2.4s ease-out both, pulsar 5s ease-in-out 2.4s infinite; }
 @keyframes pulsar { 50% { opacity: 1; } }
 
@@ -20,18 +20,18 @@ html, body { background: var(--noite); }
 .js:not(.calmo) .entra .palavra-lema,
 .js:not(.calmo) .entra .apoio,
 .js:not(.calmo) .entra .acoes,
-.js:not(.calmo) .entra .abertura-figura img {
+.js:not(.calmo) .entra .abertura-figura .logo-viva {
   opacity: 0; filter: blur(14px); transform: translateY(14px);
 }
 #titulo { white-space: nowrap; }
 .letra, .palavra-lema { display: inline-block; }
 .letra { padding-top: .22em; margin-top: -.22em; }
 .palavra-lema { white-space: pre; }
-.js:not(.calmo) .entra.revelar .letra, .js:not(.calmo) .entra.revelar .palavra-lema, .js:not(.calmo) .entra.revelar .apoio, .js:not(.calmo) .entra.revelar .acoes, .js:not(.calmo) .entra.revelar .abertura-figura img {
+.js:not(.calmo) .entra.revelar .letra, .js:not(.calmo) .entra.revelar .palavra-lema, .js:not(.calmo) .entra.revelar .apoio, .js:not(.calmo) .entra.revelar .acoes, .js:not(.calmo) .entra.revelar .abertura-figura .logo-viva {
   opacity: 1; filter: blur(0); transform: none;
   transition: opacity .9s ease, filter .9s ease, transform .9s cubic-bezier(.2,.7,.2,1);
 }
-.js:not(.calmo) .entra.revelar .abertura-figura img { transition-duration: 1.4s; }
+.js:not(.calmo) .entra.revelar .abertura-figura .logo-viva { transition-duration: 1.4s; }
 
 /* ---------- portal: do código ao PDF ---------- */
 .portal { position: relative; height: 280svh; }
@@ -192,3 +192,12 @@ html, body { background: var(--noite); }
 .calmo .face { position: relative; width: 240px; height: 360px; transform: none; backface-visibility: visible; }
 .pdf-eq .katex-display { margin: 0; }
 .pdf-eq .katex { font-size: 1.05em; }
+
+/* ---------- logo viva: o cabelo do curupira pega fogo ---------- */
+.abertura-figura .logo-viva { position: relative; z-index: 1; width: 100%; aspect-ratio: 1; }
+.abertura-figura .logo-viva img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+/* a tela das chamas passa um pouco das bordas da logo, para as labaredas subirem livres */
+.abertura-figura .logo-viva canvas { position: absolute; left: -10%; top: -26%; width: 120%; height: 126%; pointer-events: none; z-index: 3; }
+.js:not(.calmo) .entra.revelar .brasa { animation: acender 2.4s ease-out both, tremular 3.2s steps(1) 2.4s infinite; }
+@keyframes tremular { 0% { opacity: .85; } 13% { opacity: 1; } 27% { opacity: .78; } 41% { opacity: .95; } 58% { opacity: .82; } 74% { opacity: 1; } 88% { opacity: .88; } }
+.calmo .chamas { display: none; }

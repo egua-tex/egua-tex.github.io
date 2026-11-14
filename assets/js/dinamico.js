@@ -42,7 +42,7 @@
 
   /* ---------- curupira segue o mouse de leve ---------- */
   const figura = document.getElementById("figura");
-  const img = figura.querySelector("img"), brasa = figura.querySelector(".brasa");
+  const img = figura.querySelector(".logo-viva"), brasa = figura.querySelector(".brasa");
   if (matchMedia("(pointer: fine)").matches) {
     addEventListener("pointermove", (e) => {
       const x = e.clientX / innerWidth - 0.5, y = e.clientY / innerHeight - 0.5;
@@ -50,6 +50,113 @@
       brasa.style.transform = `translate(${-x * 30}px, ${-y * 24}px)`;
     });
   }
+
+
+  /* ---------- o cabelo do curupira pega fogo: labaredas e faíscas ---------- */
+  (() => {
+    const tela = figura.querySelector(".chamas");
+    if (!tela) return;
+    const ctx = tela.getContext("2d");
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    // A tela das chamas é 120% x 126% da logo, deslocada 10% para a esquerda e 26% para cima.
+    const DX = 0.10 / 1.2, DY = 0.26 / 1.26, LX = 1 / 1.2, LY = 1 / 1.26;
+    const CABECA = [0.64, 0.70]; // de onde o fogo começa a se espalhar
+    let w = 0, h = 0, escala = 1, pontos = [], chamas = [], faiscas = [];
+    let ativo = false, inicio = 0;
+
+    // Desenho de cada língua de fogo: um brilho redondo, do miolo claro à borda transparente.
+    function sprite(miolo, meio, borda) {
+      const c = document.createElement("canvas"); c.width = c.height = 64;
+      const g = c.getContext("2d"), r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+      r.addColorStop(0, miolo); r.addColorStop(0.35, meio); r.addColorStop(1, borda);
+      g.fillStyle = r; g.fillRect(0, 0, 64, 64); return c;
+    }
+    const FASES = [
+      sprite("rgba(255,250,220,1)", "rgba(255,210,80,.85)", "rgba(255,150,30,0)"),
+      sprite("rgba(255,220,120,1)", "rgba(255,130,30,.75)", "rgba(230,60,20,0)"),
+      sprite("rgba(255,150,60,.9)", "rgba(224,50,40,.55)", "rgba(120,20,60,0)"),
+    ];
+
+    function medir() {
+      w = tela.clientWidth; h = tela.clientHeight; escala = w / 640;
+      tela.width = w * dpr; tela.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    // As labaredas nascem na borda de cima de cada mecha do cabelo.
+    const fonte = new Image();
+    fonte.src = figura.querySelector(".cabelo").currentSrc || figura.querySelector(".cabelo").src;
+    fonte.onload = () => {
+      const N = 140, c = document.createElement("canvas"); c.width = c.height = N;
+      const g = c.getContext("2d"); g.drawImage(fonte, 0, 0, N, N);
+      const d = g.getImageData(0, 0, N, N).data;
+      for (let y = 2; y < N; y += 2) for (let x = 0; x < N; x += 2) {
+        if (d[(y * N + x) * 4 + 3] < 200) continue;
+        const px = x / N, py = y / N;
+        const borda = d[((y - 2) * N + x) * 4 + 3] < 40;
+        // pontos da borda de cima entram mais vezes: ali o fogo é mais forte
+        const vezes = borda ? 4 : (py < 0.42 ? 1 : 0);
+        for (let k = 0; k < vezes; k++) pontos.push({ x: px, y: py, dist: Math.hypot(px - CABECA[0], py - CABECA[1]), ponta: 1 - py });
+      }
+    };
+
+    const naTela = (p) => [(DX + p.x * LX) * w, (DY + p.y * LY) * h];
+
+    function quadro(agora) {
+      if (!ativo) return;
+      ctx.clearRect(0, 0, w, h);
+      const t = inicio ? (agora - inicio) / 1000 : 0;
+      // O fogo se espalha da cabeça até as pontas em cerca de 2,5 segundos.
+      const alcance = Math.min(1.2, t * 0.5);
+      const forca = Math.min(1, t / 2.5);
+      if (inicio && pontos.length) {
+        const acesos = pontos.filter((p) => p.dist < alcance);
+        const novas = Math.round((3 + 7 * forca) * Math.max(0.35, Math.min(1, acesos.length / 300)));
+        for (let i = 0; i < novas && acesos.length && chamas.length < 300; i++) {
+          const p = acesos[(Math.random() * acesos.length) | 0];
+          const [x, y] = naTela(p);
+          const alta = 0.55 + p.ponta * 0.9; // mechas mais altas soltam labaredas maiores
+          chamas.push({ x: x + (Math.random() - 0.5) * 6 * escala, y, vx: (Math.random() - 0.5) * 0.5 * escala - 0.15 * escala,
+                        vy: -(1.4 + Math.random() * 1.8) * escala * alta, vida: 0, max: 18 + Math.random() * 22,
+                        r: (9 + Math.random() * 13) * escala * alta, fase: Math.random() * 6.28 });
+          if (Math.random() < 0.08 * forca) faiscas.push({ x, y, vx: (Math.random() - 0.6) * 0.8 * escala, vy: -(1.2 + Math.random() * 1.6) * escala,
+                                                           vida: 0, max: 50 + Math.random() * 60, r: (0.8 + Math.random() * 1.4) * escala });
+        }
+      }
+      ctx.globalCompositeOperation = "lighter";
+      chamas = chamas.filter((c) => c.vida < c.max);
+      for (const c of chamas) {
+        c.vida++;
+        const k = c.vida / c.max;
+        c.x += c.vx + Math.sin(c.vida * 0.45 + c.fase) * 0.6 * escala;
+        c.y += c.vy; c.vy *= 0.985;
+        const tam = c.r * (1 - k * 0.6);
+        ctx.globalAlpha = Math.min(1, k * 6) * Math.pow(1 - k, 1.3) * 0.5;
+        ctx.drawImage(FASES[k < 0.3 ? 0 : k < 0.65 ? 1 : 2], c.x - tam * 0.75, c.y - tam * 2.6, tam * 1.5, tam * 3.4);
+      }
+      ctx.globalCompositeOperation = "lighter";
+      faiscas = faiscas.filter((f) => f.vida < f.max);
+      for (const f of faiscas) {
+        f.vida++; f.x += f.vx + Math.sin(f.vida / 6) * 0.35 * escala; f.y += f.vy; f.vy *= 0.993;
+        const k = f.vida / f.max;
+        ctx.globalAlpha = (1 - k) * 0.95;
+        ctx.fillStyle = k < 0.4 ? "#ffe39a" : k < 0.75 ? "#ff9a3c" : "#e8473c";
+        ctx.beginPath(); ctx.arc(f.x, f.y, f.r * (1 - k * 0.5), 0, 6.29); ctx.fill();
+      }
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+      requestAnimationFrame(quadro);
+    }
+
+    medir(); addEventListener("resize", medir);
+    // O fogo pega depois que a logo termina de aparecer.
+    const acender = () => setTimeout(() => { inicio = performance.now(); }, 1100);
+    if (abertura.classList.contains("revelar")) acender();
+    else new MutationObserver((m, o) => { if (abertura.classList.contains("revelar")) { o.disconnect(); acender(); } })
+      .observe(abertura, { attributes: true, attributeFilter: ["class"] });
+    new IntersectionObserver((e) => {
+      const antes = ativo; ativo = e[0].isIntersecting;
+      if (ativo && !antes) requestAnimationFrame(quadro);
+    }).observe(tela);
+  })();
 
   /* ---------- portal: rolagem gira o cartão e troca as legendas ---------- */
   const portal = document.getElementById("portal");
