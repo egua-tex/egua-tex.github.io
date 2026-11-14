@@ -1,8 +1,8 @@
-// ÉguaTex: editor de fórmulas ao vivo e busca da versão mais recente do instalador para Windows.
+// ÉguaTex: editor de fórmulas ao vivo e busca da versão mais recente do instalador.
 
 const REPO = "egua-tex/egua-tex.github.io";
 
-/* ---------------- Fogueira: LaTeX ao vivo ---------------- */
+/* ---------------- Experimente: LaTeX ao vivo ---------------- */
 const EXEMPLOS = {
   bhaskara: "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}",
   gauss: "\\int_{-\\infty}^{\\infty} e^{-x^2}\\,dx = \\sqrt{\\pi}",
