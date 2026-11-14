@@ -213,6 +213,19 @@ button.botao { cursor: pointer; }
   border: 2px solid transparent;
 }
 .baixar-logo { width: clamp(96px, 14vw, 156px); }
+.acoes-plataformas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+@media (max-width: 640px) { .acoes-plataformas { grid-template-columns: 1fr; } }
+.plataforma-baixar {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  background: var(--noite); border: 1.5px solid var(--noite-3); border-radius: 18px; padding: 18px; min-width: 0;
+}
+.plataforma-baixar svg { width: 34px; height: 34px; fill: none; stroke: var(--chama); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.plataforma-baixar h3 { font-size: 1.25rem; margin: 2px 0 0; }
+.plataforma-baixar .req { margin: 0 0 8px; font-size: .92rem; color: var(--texto-suave); }
+.plataforma-baixar .botao { width: 100%; justify-content: center; text-align: center; }
+.plataforma-baixar .tam { font-size: .85rem; color: var(--texto-suave); min-height: 1.2em; }
+.botao.desligado { opacity: .55; cursor: default; pointer-events: none; }
+#p-linux svg { stroke: var(--verde-claro); }
 .release-estado { color: var(--texto-suave); margin-top: 0.7em; }
 .release-detalhes {
   display: flex; flex-wrap: wrap; gap: 12px 36px; margin: 1.2em 0 0;
@@ -575,6 +588,17 @@ button.botao-linha { background: transparent; cursor: pointer; }
 .instalar-abertura h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: .35em; }
 .instalar-abertura p { color: var(--texto-suave); font-size: 1.15rem; }
 .instalar-pagina .passos a { color: var(--chama); }
+.sistemas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.sistemas a { padding: 8px 18px; border-radius: 999px; border: 1.5px solid var(--noite-3); color: var(--texto); text-decoration: none; font-family: var(--fonte-titulo); font-weight: 700; }
+.sistemas a:hover { border-color: var(--chama); color: var(--chama); }
+.sistemas a span { font-weight: 500; font-size: .85em; color: var(--texto-suave); }
+.sistema { scroll-margin-top: 90px; }
+.sistema + .sistema { margin-top: clamp(48px, 7vw, 80px); padding-top: clamp(36px, 5vw, 56px); border-top: 1px solid var(--noite-3); }
+.sistema > h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin: 0 0 .2em; }
+.sistema .requisito { color: var(--texto-suave); margin: 0 0 28px; }
+.sistema .requisito.em-breve { color: var(--chama); font-family: var(--fonte-titulo); font-weight: 700; margin-bottom: 10px; }
+.sistema-aviso { color: var(--texto-suave); max-width: var(--medida); }
+.sistema-aviso a { color: var(--chama); }
 
 .outras-distribuicoes { margin-top: clamp(56px, 8vw, 96px); padding-top: clamp(40px, 6vw, 64px); border-top: 1px solid var(--noite-3); }
 .outras-distribuicoes > h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin: 0 0 .4em; }

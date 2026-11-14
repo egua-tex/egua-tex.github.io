@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Como instalar | ÉguaTex</title>
-  <meta name="description" content="Como instalar o ÉguaTex no Windows, passo a passo, e como usar outra distribuição LaTeX, como MiKTeX ou TeX Live.">
+  <meta name="description" content="Como instalar o ÉguaTex no Windows e no Android, passo a passo, e como usar outra distribuição LaTeX, como MiKTeX ou TeX Live.">
   <meta name="theme-color" content="#1c0a2b">
   <link rel="icon" type="image/png" href="favicon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261114o">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261114p">
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -35,19 +35,45 @@
     <main id="conteudo" class="instalar-pagina">
     <section class="instalar-abertura" aria-labelledby="instalar-titulo">
       <h1 id="instalar-titulo">Como instalar</h1>
-      <p>A instalação leva uns dois minutos e não pede conta nem cadastro.</p>
+      <p>A instalação leva uns dois minutos e não pede conta nem cadastro. Escolha o seu sistema.</p>
+      <nav class="sistemas" aria-label="Sistemas">
+        <a href="#windows">Windows</a>
+        <a href="#android">Android</a>
+        <a href="#linux">Linux <span>em breve</span></a>
+      </nav>
     </section>
 
-    <ol class="passos">
-      <li><h3>Baixe o instalador</h3><p>Clique em “Baixar para Windows” na <a href="index.html#baixar">página inicial</a>. O arquivo <code>ÉguaTex_x64-setup.exe</code> vai para a pasta Downloads.</p></li>
-      <li><h3>Abra o arquivo baixado</h3><p>Dê dois cliques no instalador. Se o Windows mostrar “O Windows protegeu o computador”, clique em “Mais informações” e depois em “Executar assim mesmo”. O aviso aparece porque o programa ainda não tem assinatura digital.</p></li>
-      <li><h3>Instale</h3><p>Siga as telas do instalador. Não precisa ser administrador nem instalar o LaTeX à parte: o TinyTeX já vem junto.</p></li>
-      <li><h3>Abra e escreva</h3><p>O curupira aparece no menu Iniciar. Crie um documento em branco, escreva e clique em Compilar para ver o PDF.</p></li>
-    </ol>
+    <section class="sistema" id="windows" aria-labelledby="windows-titulo">
+      <h2 id="windows-titulo">No Windows</h2>
+      <p class="requisito">Windows 10 ou 11, 64 bits.</p>
+      <ol class="passos">
+        <li><h3>Baixe o instalador</h3><p>Na <a href="index.html#baixar">página inicial</a>, clique em “Baixar” no quadro do Windows. O arquivo <code>ÉguaTex_x64-setup.exe</code> vai para a pasta Downloads.</p></li>
+        <li><h3>Abra o arquivo baixado</h3><p>Dê dois cliques no instalador. Se o Windows mostrar “O Windows protegeu o computador”, clique em “Mais informações” e depois em “Executar assim mesmo”. O aviso aparece porque o programa ainda não tem assinatura digital.</p></li>
+        <li><h3>Instale</h3><p>Siga as telas do instalador. Não precisa ser administrador nem instalar o LaTeX à parte: o TinyTeX já vem junto.</p></li>
+        <li><h3>Abra e escreva</h3><p>O curupira aparece no menu Iniciar. Crie um documento em branco, escreva e clique em Compilar para ver o PDF.</p></li>
+      </ol>
+    </section>
+
+    <section class="sistema" id="android" aria-labelledby="android-titulo">
+      <h2 id="android-titulo">No Android</h2>
+      <p class="requisito">Android 8.0 ou mais novo.</p>
+      <ol class="passos">
+        <li><h3>Baixe o APK</h3><p>Pelo celular, abra a <a href="index.html#baixar">página inicial</a> e toque em “Baixar” no quadro do Android. O arquivo <code>EguaTex_android.apk</code> vai para a pasta Downloads.</p></li>
+        <li><h3>Libere a instalação</h3><p>Toque no arquivo baixado. Como o app não vem da Play Store, o Android pede permissão: toque em “Configurações” e ative “Permitir desta fonte” para o navegador que baixou o arquivo.</p></li>
+        <li><h3>Instale</h3><p>Volte e toque em “Instalar”. Se o Play Protect avisar que o app é desconhecido, toque em “Mais detalhes” e depois em “Instalar assim mesmo”. O LaTeX já vem dentro do app.</p></li>
+        <li><h3>Abra e escreva</h3><p>O curupira aparece entre os seus apps. Crie um documento, escreva e toque em Compilar para ver o PDF.</p></li>
+      </ol>
+    </section>
+
+    <section class="sistema" id="linux" aria-labelledby="linux-titulo">
+      <h2 id="linux-titulo">No Linux</h2>
+      <p class="requisito em-breve">Em breve.</p>
+      <p class="sistema-aviso">A versão para Linux está a caminho. Quando ela sair, o arquivo aparece no quadro do Linux na <a href="index.html#baixar">página inicial</a> e o passo a passo fica aqui.</p>
+    </section>
 
     <section class="outras-distribuicoes texto-longo" id="outras-distribuicoes" aria-labelledby="outras-titulo">
       <h2 id="outras-titulo">Outras distribuições LaTeX</h2>
-      <p class="sub">O instalador do ÉguaTex já traz o TinyTeX. Esta parte serve para quem quer outra distribuição ou recebeu o aviso “Nenhum compilador LaTeX foi encontrado”.</p>
+      <p class="sub">Esta parte vale para o computador. O instalador do ÉguaTex já traz o TinyTeX, então ela serve só para quem quer outra distribuição ou recebeu o aviso “Nenhum compilador LaTeX foi encontrado”. No Android não é preciso: o LaTeX já vem dentro do app.</p>
 
       <div class="opcoes">
         <article class="opcao">
@@ -72,7 +98,7 @@
       </div>
 
       <h3 class="conferir-titulo">Conferir se funcionou</h3>
-      <p>Abra um projeto e clique em Compilar. Se o PDF aparecer à direita, está tudo certo. Se aparecer “Motor não encontrado”, reinicie o computador para o Windows atualizar o PATH.</p>
+      <p>Abra um projeto e clique em Compilar. Se o PDF aparecer à direita, está tudo certo. Se aparecer “Motor não encontrado” no Windows, reinicie o computador para o sistema atualizar o PATH.</p>
     </section>
   </main>
 
@@ -85,7 +111,7 @@
     </div>
   </footer>
 
-  <script defer src="assets/js/config.js?v=20261114o"></script>
-  <script defer src="assets/js/navegacao.js?v=20261114o"></script>
+  <script defer src="assets/js/config.js?v=20261114p"></script>
+  <script defer src="assets/js/navegacao.js?v=20261114p"></script>
 </body>
 </html>
