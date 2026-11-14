@@ -60,7 +60,7 @@
     const dpr = Math.min(2, devicePixelRatio || 1);
     // A tela das chamas é 120% x 126% da logo, deslocada 10% para a esquerda e 26% para cima.
     const DX = 0.10 / 1.2, DY = 0.26 / 1.26, LX = 1 / 1.2, LY = 1 / 1.26;
-    const CABECA = [0.64, 0.70]; // de onde o fogo começa a se espalhar
+    const CABECA = [0.55, 0.46]; // de onde o fogo começa a se espalhar
     let w = 0, h = 0, escala = 1, pontos = [], chamas = [], faiscas = [];
     let ativo = false, inicio = 0;
 

@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://egua-tex.github.io/">
-    <img src="assets/img/banner.jpg" alt="ÉguaTex: Escreva LaTeX de qualquer canto da Amazônia, mesmo sem internet. Ao lado, a logo do curupira de pele verde e cabelo em chamas." width="100%">
+    <img src="assets/img/banner.jpg" alt="ÉguaTex: Escreva LaTeX de qualquer canto da Amazônia, mesmo sem internet. Ao lado, a logo do curupira de perfil, com cabelo em chamas e colar de folhas." width="100%">
   </a>
 </p>
 
