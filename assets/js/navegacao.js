@@ -21,7 +21,7 @@
   document.body.insertAdjacentHTML("afterbegin", `
     <div class="carregando" id="carregando" role="status" aria-live="polite" aria-label="Carregando o ÉguaTex">
       <div class="carregando-centro">
-        <img class="carregando-logo" src="assets/img/curupira-256.png" alt="" width="150" height="150">
+        <img class="carregando-logo" src="assets/img/curupira-256.png" alt="" width="176" height="176">
         <div class="carregando-fundo" aria-hidden="true"><span>ÉguaTex</span></div>
         <div class="trilha">
           <svg class="pegadas-carga" viewBox="0 0 360 64" aria-hidden="true">
