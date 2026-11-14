@@ -1,6 +1,6 @@
 // ÉguaTex: seção de avaliações da página inicial (média, lista e formulário).
-// O endereço do servidor fica em assets/js/config.js. Sem endereço, a seção fica escondida.
-// Moderação: abrir o site com #moderar no fim do endereço e digitar a senha libera o botão Apagar.
+// As avaliações ficam numa planilha Google (servidor-avaliacoes/Codigo.gs). O endereço do app da Web
+// fica em assets/js/config.js; sem endereço, a seção fica escondida. Para apagar, apague a linha na planilha.
 
 (() => {
   const secao = document.getElementById("avaliacoes");
@@ -21,15 +21,13 @@
 
   const ESTRELA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8z"/></svg>';
 
-  let senha = "";
-  try { senha = sessionStorage.getItem("eguatex-moderacao") || ""; } catch {}
-
-  const pedir = (caminho, opcoes = {}) => {
-    if (senha && caminho.startsWith("/admin")) opcoes = { ...opcoes, headers: { ...(opcoes.headers || {}), Authorization: `Bearer ${senha}` } };
-    return window.EGUATEX && window.EGUATEX.simular
+  const pedir = (caminho, opcoes = {}) =>
+    window.EGUATEX && window.EGUATEX.simular
       ? window.EGUATEX.simular(caminho, opcoes)
-      : fetch(SERVIDOR.replace(/\/$/, "") + caminho, opcoes).then(async (r) => ({ status: r.status, corpo: await r.json() }));
-  };
+      : fetch(SERVIDOR, opcoes).then(async (r) => {
+          const corpo = await r.json();
+          return { status: corpo.erro ? 400 : r.status, corpo };
+        });
 
   function desenharEstrelas(alvo, nota) {
     alvo.innerHTML = [1, 2, 3, 4, 5].map((i) => {
@@ -56,14 +54,13 @@
       total.textContent = corpo.total === 1 ? "1 avaliação" : `${corpo.total} avaliações`;
       lista.innerHTML = corpo.avaliacoes.length
         ? corpo.avaliacoes.map((a) => `
-            <li class="av-item" data-id="${a.id}">
+            <li class="av-item">
               <div class="av-item-topo">
                 <strong>${escapar(a.nome)}</strong>
                 <span class="av-estrelas" role="img" aria-label="${a.nota} de 5 estrelas">${ESTRELA.repeat(a.nota)}</span>
               </div>
               <p>${escapar(a.comentario).replace(/\n/g, "<br>")}</p>
               <time>${dataLegivel(a.criado_em)}</time>
-              <button type="button" class="av-apagar">Apagar</button>
             </li>`).join("")
         : '<li class="av-vazio">Nenhuma avaliação ainda. Baixou o ÉguaTex? Conte aqui o que achou.</li>';
     } catch {
@@ -98,7 +95,7 @@
     try {
       const dados = { nome: form.nome.value, nota: Number(form.nota.value), comentario: form.comentario.value, site: form.site.value };
       const { status, corpo } = await pedir("/avaliacoes", {
-        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados),
+        method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(dados),
       });
       if (status >= 400) { mostrarAviso(corpo.erro || "Não deu para enviar. Confira os campos.", "erro"); return; }
       form.reset(); marcar(""); contador.textContent = "0 de 1000";
@@ -112,75 +109,5 @@
     }
   });
 
-  /* ---------- moderação (só com #moderar no endereço e a senha) ---------- */
-  const caixa = document.createElement("form");
-  caixa.className = "av-moderar";
-  caixa.hidden = true;
-  caixa.innerHTML = `
-    <label for="av-senha">Senha de moderação</label>
-    <input id="av-senha" type="password" autocomplete="current-password" required>
-    <button type="submit" class="botao botao-linha pequeno">Entrar</button>
-    <span class="av-moderar-msg" role="status"></span>`;
-  secao.querySelector(".secao-cabeca").after(caixa);
-  const msgModerar = caixa.querySelector(".av-moderar-msg");
-
-  const sairModeracao = document.createElement("button");
-  sairModeracao.type = "button";
-  sairModeracao.className = "botao botao-linha pequeno av-sair";
-  sairModeracao.textContent = "Sair da moderação";
-  sairModeracao.hidden = true;
-  secao.querySelector(".secao-cabeca").after(sairModeracao);
-
-  function modoModeracao(ligado) {
-    secao.classList.toggle("moderando", ligado);
-    sairModeracao.hidden = !ligado;
-    caixa.hidden = ligado || location.hash !== "#moderar";
-  }
-
-  async function conferirSenha() {
-    const { status } = await pedir("/admin/verificar");
-    if (status === 200) { modoModeracao(true); return true; }
-    senha = ""; try { sessionStorage.removeItem("eguatex-moderacao"); } catch {}
-    modoModeracao(false);
-    return false;
-  }
-
-  caixa.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    senha = caixa.querySelector("input").value;
-    msgModerar.textContent = "Conferindo…";
-    if (await conferirSenha()) {
-      try { sessionStorage.setItem("eguatex-moderacao", senha); } catch {}
-      msgModerar.textContent = "";
-      caixa.reset();
-    } else msgModerar.textContent = "Senha incorreta.";
-  });
-
-  sairModeracao.addEventListener("click", () => {
-    senha = ""; try { sessionStorage.removeItem("eguatex-moderacao"); } catch {}
-    history.replaceState(null, "", location.pathname);
-    modoModeracao(false);
-  });
-
-  lista.addEventListener("click", async (e) => {
-    const b = e.target.closest(".av-apagar");
-    if (!b || !secao.classList.contains("moderando")) return;
-    if (!b.dataset.confirmar) { b.dataset.confirmar = "1"; b.textContent = "Confirmar: apagar de vez"; return; }
-    b.disabled = true;
-    const { status } = await pedir(`/admin/avaliacoes/${b.closest("li").dataset.id}`, { method: "DELETE" });
-    if (status !== 200) { b.disabled = false; b.textContent = "Não deu para apagar. Tentar de novo"; delete b.dataset.confirmar; return; }
-    carregar();
-  });
-
-  function verEndereco() {
-    if (location.hash === "#moderar") {
-      caixa.hidden = secao.classList.contains("moderando");
-      secao.scrollIntoView();
-    }
-  }
-  addEventListener("hashchange", verEndereco);
-
   carregar();
-  if (senha) conferirSenha();
-  verEndereco();
 })();

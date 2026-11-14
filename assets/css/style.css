@@ -445,12 +445,5 @@ button.botao { cursor: pointer; }
 .av-form .campo input:focus, .av-form .campo textarea:focus { border-color: var(--roxo-claro); outline: none; box-shadow: 0 0 0 3px rgba(201,166,240,.25); }
 .av-form .campo :user-invalid { border-color: var(--brasa); }
 .av-publico { margin: 0 0 12px; font-size: .9rem; color: var(--texto-suave); }
-.av-apagar { display: none; margin-top: 10px; font: inherit; font-size: .9rem; font-weight: 700; color: #ff9aaa; background: transparent; border: 1.5px solid rgba(224,36,62,.6); border-radius: 999px; padding: 5px 14px; cursor: pointer; }
-.moderando .av-apagar { display: inline-block; }
-.av-moderar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 24px; padding: 14px 16px; border: 1.5px dashed var(--roxo); border-radius: 14px; }
-.av-moderar label { font-weight: 700; }
-.av-moderar input { font: inherit; color: var(--texto); background: #140720; border: 1.5px solid var(--noite-3); border-radius: 10px; padding: 8px 12px; flex: 1 1 180px; }
-.av-moderar-msg { font-size: .9rem; color: var(--texto-suave); }
 .botao.pequeno { min-height: 0; padding: 6px 14px; font-size: .9rem; }
 button.botao-linha { background: transparent; cursor: pointer; }
-.av-sair { margin: 0 0 20px; }

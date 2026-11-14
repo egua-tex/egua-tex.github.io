@@ -1,39 +1,25 @@
-# Servidor das avaliações do site
+# Avaliações do site
 
-Guarda as avaliações enviadas pelo site: nome, nota de 1 a 5 e comentário. Nada além disso é pedido a quem avalia. A avaliação aparece no site assim que é enviada.
-
-Roda na Cloudflare (Workers e banco D1), no plano gratuito.
+As avaliações enviadas pelo site (nome, nota de 1 a 5 e comentário) ficam numa planilha Google. Nada além disso é pedido a quem avalia, e a avaliação aparece no site assim que é enviada.
 
 ## Como ligar (uma vez só)
 
-Precisa de Node.js e de uma conta na Cloudflare.
+1. Crie uma planilha em branco no Google Planilhas, por exemplo "Avaliações ÉguaTex".
+2. Na planilha, abra **Extensões**, depois **Apps Script**.
+3. Apague o que estiver no editor, cole o conteúdo de `Codigo.gs` e clique em **Salvar**.
+4. Clique em **Implantar**, depois **Nova implantação**. Em "Tipo", escolha **App da Web**. Em "Executar como", deixe **Eu**. Em "Quem pode acessar", escolha **Qualquer pessoa**. Clique em **Implantar** e autorize.
+5. Copie o endereço que termina em `/exec` e coloque em `assets/js/config.js`, no campo `servidorAvaliacoes`.
 
-```bash
-cd servidor-avaliacoes
-npx wrangler login
-npx wrangler d1 create eguatex-avaliacoes
-```
-
-O último comando mostra um `database_id`. Cole esse valor em `wrangler.toml`, no lugar de `COLE_AQUI_O_ID_DO_BANCO`. Depois:
-
-```bash
-npx wrangler d1 execute eguatex-avaliacoes --remote --file=esquema.sql
-npx wrangler secret put TOKEN_ADMIN
-npx wrangler deploy
-```
-
-O `secret put` pede a senha de moderação. Escolha uma senha longa e entregue só a quem pode apagar avaliações.
-
-O `deploy` mostra o endereço do servidor, parecido com `https://eguatex-avaliacoes.<conta>.workers.dev`. Coloque esse endereço em `assets/js/config.js`, no campo `servidorAvaliacoes`. A seção de avaliações aparece no site assim que esse arquivo for publicado.
+A aba "Avaliações", com o cabeçalho Data, Nome, Nota e Comentário, aparece sozinha na primeira avaliação.
 
 ## Apagar uma avaliação
 
-1. Abra `https://egua-tex.github.io/#moderar`.
-2. Digite a senha de moderação. Cada avaliação ganha um botão Apagar.
-3. Clique em Apagar e depois em "Confirmar: apagar de vez".
+Apague a linha dela na planilha. Ela some do site em seguida.
 
-Quem não tem a senha não vê nem o campo, nem os botões.
+## Mudar o código depois
+
+Depois de editar o script, use **Implantar**, **Gerenciar implantações**, o lápis de editar e "Nova versão". Assim o endereço `/exec` continua o mesmo.
 
 ## Limites
 
-Cada conexão pode mandar até 3 avaliações por hora. O servidor guarda só um resumo embaralhado da conexão para isso, sem o endereço em si.
+Até 10 avaliações por minuto no site inteiro, e a mesma avaliação enviada duas vezes seguidas entra uma vez só. Um campo escondido no formulário barra a maior parte dos robôs.
