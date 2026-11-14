@@ -1,4 +1,4 @@
-// ÉguaTex: fogueira de fórmulas e busca da versão mais recente do instalador para Windows.
+// ÉguaTex: editor de fórmulas ao vivo e busca da versão mais recente do instalador para Windows.
 
 const REPO = "egua-tex/egua-tex.github.io";
 

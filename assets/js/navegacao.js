@@ -37,7 +37,7 @@
             ${pegadas}
           </svg>
         </div>
-        <p class="carregando-texto">Acendendo a fogueira…</p>
+        <p class="carregando-texto">Seguindo as pegadas do curupira…</p>
         <p class="carregando-dica">Os pés do curupira apontam para um lado e ele anda para o outro.</p>
       </div>
     </div>`);

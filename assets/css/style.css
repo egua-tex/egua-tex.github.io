@@ -139,19 +139,19 @@ button.botao { cursor: pointer; }
 }
 
 /* ---------- seções gerais ---------- */
-.fogueira, .instalar, .curupira, .baixar {
+.experimente, .instalar, .curupira, .baixar {
   padding: clamp(56px, 8vw, 104px) var(--margem);
 }
 .secao-cabeca { max-width: var(--medida); margin-bottom: 2rem; }
 .secao-cabeca p { color: var(--texto-suave); margin-top: 0.8em; }
 
-/* ---------- fogueira (editor ao vivo) ---------- */
-.fogueira {
+/* ---------- experimente (editor ao vivo) ---------- */
+.experimente {
   background: var(--noite-2);
   border-top: 1px solid var(--noite-3);
   border-bottom: 1px solid var(--noite-3);
 }
-.fogueira > * { max-width: 1180px; margin-left: auto; margin-right: auto; }
+.experimente > * { max-width: 1180px; margin-left: auto; margin-right: auto; }
 
 .exemplos { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .exemplos button {
