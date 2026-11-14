@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Como instalar | ÉguaTex</title>
+  <meta name="description" content="Como instalar o ÉguaTex no Windows, passo a passo, e como usar outra distribuição LaTeX, como MiKTeX ou TeX Live.">
+  <meta name="theme-color" content="#1c0a2b">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261114c">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <a class="marca" href="index.html" aria-label="ÉguaTex, início">
+      <img src="assets/img/curupira-256.png" alt="" width="40" height="40">
+      <span>ÉguaTex</span>
+    </a>
+    <nav aria-label="Seções">
+      <a href="index.html#portal">Como funciona</a>
+      <a href="index.html#fogueira">Experimente</a>
+      <a href="index.html#curupira">O curupira</a>
+      <a href="instalar.html" aria-current="page">Instalar</a>
+      <a href="templates.html">Templates</a>
+      <a href="contato.html">Contato</a>
+      <a class="nav-baixar" href="index.html#baixar">Baixar</a>
+    </nav>
+  </header>
+
+    <main id="conteudo" class="instalar-pagina">
+    <section class="instalar-abertura" aria-labelledby="instalar-titulo">
+      <h1 id="instalar-titulo">Como instalar</h1>
+      <p>A instalação leva uns dois minutos e não pede conta nem cadastro.</p>
+    </section>
+
+    <ol class="passos">
+      <li><h3>Baixe o instalador</h3><p>Clique em “Baixar para Windows” na <a href="index.html#baixar">página inicial</a>. O arquivo <code>ÉguaTex_x64-setup.exe</code> vai para a pasta Downloads.</p></li>
+      <li><h3>Abra o arquivo baixado</h3><p>Dê dois cliques no instalador. Se o Windows mostrar “O Windows protegeu o computador”, clique em “Mais informações” e depois em “Executar assim mesmo”. O aviso aparece porque o programa ainda não tem assinatura digital.</p></li>
+      <li><h3>Instale</h3><p>Siga as telas do instalador. Não precisa ser administrador nem instalar o LaTeX à parte: o TinyTeX já vem junto.</p></li>
+      <li><h3>Abra e escreva</h3><p>O curupira aparece no menu Iniciar. Crie um documento em branco, escreva e clique em Compilar para ver o PDF.</p></li>
+    </ol>
+
+    <section class="outras-distribuicoes texto-longo" id="outras-distribuicoes" aria-labelledby="outras-titulo">
+      <h2 id="outras-titulo">Outras distribuições LaTeX</h2>
+      <p class="sub">O instalador do ÉguaTex já traz o TinyTeX. Esta parte serve para quem quer outra distribuição ou recebeu o aviso “Nenhum compilador LaTeX foi encontrado”.</p>
+
+      <div class="opcoes">
+        <article class="opcao">
+          <h3>Opção 1: MiKTeX</h3>
+          <p class="opcao-dica">Recomendado para iniciantes</p>
+          <ol>
+            <li>Acesse <a href="https://miktex.org/download">miktex.org/download</a> e baixe o instalador para Windows.</li>
+            <li>Rode o instalador e aceite as opções padrão.</li>
+            <li>Na pergunta “Install missing packages on-the-fly”, escolha <strong>Yes</strong>. Assim o MiKTeX baixa sozinho os pacotes que o documento pedir.</li>
+            <li>Feche e abra o ÉguaTex de novo. O aviso some.</li>
+          </ol>
+        </article>
+        <article class="opcao">
+          <h3>Opção 2: TeX Live</h3>
+          <p class="opcao-dica">Instalação completa</p>
+          <ol>
+            <li>Acesse <a href="https://tug.org/texlive/windows.html">tug.org/texlive/windows.html</a> e baixe o <code>install-tl-windows.exe</code>.</li>
+            <li>Rode o instalador. A instalação completa ocupa cerca de 8 GB e leva de 1 a 2 horas.</li>
+            <li>Feche e abra o ÉguaTex de novo.</li>
+          </ol>
+        </article>
+      </div>
+
+      <h3 class="conferir-titulo">Conferir se funcionou</h3>
+      <p>Abra um projeto e clique em Compilar. Se o PDF aparecer à direita, está tudo certo. Se aparecer “Motor não encontrado”, reinicie o computador para o Windows atualizar o PATH.</p>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-faixa" aria-hidden="true"></div>
+    <div class="rodape-conteudo">
+      <p class="rodape-marca"><img src="assets/img/curupira-256.png" alt="" width="32" height="32"> ÉguaTex</p>
+      <p>Feito no Pará por Jéssica Melo e José Paulo de Almeida Junior.</p>
+      <p><a href="contato.html">Contato, sugestões e problemas</a>, <a href="privacidade.html">política de privacidade</a> e <a href="termos.html">termos de uso</a>.</p>
+    </div>
+  </footer>
+
+  <script defer src="assets/js/config.js?v=20261114c"></script>
+  <script defer src="assets/js/navegacao.js?v=20261114c"></script>
+</body>
+</html>
